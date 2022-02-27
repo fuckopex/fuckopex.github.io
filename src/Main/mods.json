@@ -1,0 +1,17 @@
+[
+	
+	{
+		"type": "L",
+		"name": "Локальный",
+		"description": "Запуск мода \"localhost:9001/index.js\"",
+		"path": "http://localhost:9001/"
+	},
+
+	{
+		"type": "S",
+		"name": "Tanki Online",
+		"description": "Чистый клиент",
+		"path": "/src/Main/mod-0"
+	}
+
+]

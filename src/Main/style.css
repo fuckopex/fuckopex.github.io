@@ -1,0 +1,137 @@
+
+@font-face {
+	font-family: 'Rubik';
+	font-style: normal;
+	font-weight: 400;
+	src: local(''), url('/src/Main/Rubik-Regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Rubik';
+	font-style: normal;
+	font-weight: 500;
+	src: local(''), url('/src/Main/Rubik-Medium.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Rubik';
+	font-style: normal;
+	font-weight: 600;
+	src: local(''), url('/src/Main/Rubik-Bold.woff2') format('woff2');
+}
+
+:root {
+	--gray-300: #d1d5db;
+	--gray-400: #9ca3af;
+	--gray-600: #4b5563;
+
+	--orange-100: #ffedd5;
+	--orange-600: #ea580c;
+
+	--yellow-100: #fef9c3;
+	--yellow-600: #ca8a04;
+
+	--emerald-100: #d1fae5;
+	--emerald-600: #059669;
+
+	--cyan-100: #cffafe;
+
+	--blue-100: #dbeafe;
+	--blue-600: #2563eb;
+
+	--fuchsia-100: #fae8ff;
+	--rose-100: #ffe4e6;
+
+	--size-small: 1.9vh;
+	--size-medium: 2.3vh;
+	--size-big: 4.5vh;
+}
+
+body {
+	font-family: Rubik;
+	justify-content: space-between;
+	background: no-repeat bottom right/40vh url('girl.svg');
+	
+}
+
+div[header] {
+	width: 100vw;
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: var(--size-big);
+	font-weight: 600;
+	color: var(--gray-300);
+}
+
+div[mods] {
+	width: 100vw;
+	height: 62vh;
+	display: flex;
+    justify-content: center;
+
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+div[mod-type="L"] {	--color-s: var(--yellow-100); --color-e: var(--orange-100); --color-t: var(--yellow-600); }
+div[mod-type="T"] { --color-s: var(--orange-100); --color-e: var(--rose-100); --color-t: var(--orange-600); }
+div[mod-type="S"] { --color-s: var(--emerald-100); --color-e: var(--cyan-100); --color-t: var(--emerald-600); }
+div[mod-type="U"] { --color-s: var(--blue-100); --color-e: var(--fuchsia-100); --color-t: var(--blue-600); }
+
+div[mod] {
+	width: 27vh;
+	height: 22vh;
+	padding: 3vh 3.5vh;
+	margin: 1.5vh;
+	border-radius: 2vh;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex: 0 0 auto;
+
+	background: linear-gradient(35deg, var(--color-s) 10%, var(--color-e) 90%);
+}
+
+div[mod] > div {
+	overflow: hidden;
+}
+
+div[mod-name] {
+	font-size: var(--size-medium);
+	font-weight: 500;
+	white-space: nowrap;
+	color: var(--color-t);
+}
+
+div[mod-description] {
+	height: 14vh;
+	font-size: var(--size-small);
+	font-weight: 400;
+	color: var(--gray-600);
+}
+
+div[mod-launch] {
+	font-size: var(--size-small);
+	font-weight: 500;
+	color: var(--color-t);
+	cursor: pointer;
+}
+
+div[mod-launch]:hover {
+	text-decoration: underline;
+}
+
+div[footer] {
+	width: 100vw;
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: var(--size-small);
+	color: var(--gray-400);
+
+	white-space: nowrap;
+}
