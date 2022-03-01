@@ -24,7 +24,7 @@ class MainBlock extends Block {
 
 			div.querySelector( 'div[mod-type]' ).setAttribute( 'mod-type', mod.type );
 			div.querySelector( 'div[mod-name]' ).textContent = mod.name;
-			div.querySelector( 'div[mod-description]' ).textContent = mod.description;
+			div.querySelector( 'div[mod-desc]' ).textContent = mod.desc;
 			div.querySelector( 'div[mod-launch]' ).addEventListener( 'click', async () => {
 
 				await ModBlock.init( mod );

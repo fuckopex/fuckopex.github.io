@@ -1,0 +1,1 @@
+node --experimental-fetch Datapack.js src

@@ -1,6 +1,3 @@
-
-const rwoc = ( url, init = {} ) => ( init.cache = 'no-store', fetch( url, init ) );
-
 class IMCache {
 
 	constructor () {
@@ -19,45 +16,48 @@ class IMCache {
 
 	}
 
-	async load ( pack, ab, ml, meta, data ) {
+	async load ( pack, ab, len, meta, data ) {
 
-		pack = await this.update();
+		for ( pack of [ 'src', 'tnk' ] ) {
 
-		ab = new Uint8Array( await pack.arrayBuffer() );
-		ml = ab.indexOf( 0x5D );
-		meta = JSON.parse( new TextDecoder().decode( ab.subarray( 0, ml + 1 ) ) );
-		data = ab.subarray( ml + 1, ab.length );
+			pack = await this.update( pack );
 
-		meta.reduce( ( begin, file, end, blob ) => {
+			ab = new Uint8Array( await pack.arrayBuffer() );
+			len = ab.indexOf( 0x5D );
+			meta = JSON.parse( new TextDecoder().decode( ab.subarray( 0, len + 1 ) ) );
+			data = ab.subarray( len + 1, ab.length );
 
-			end = begin + file.size;
-			blob = new Blob( [ data.subarray( begin, end ) ], { type: file.type } );
-			this.resps[ file.url ] = new Response( blob );
+			meta.reduce( ( begin, file, end, blob ) => {
 
-			return end;
+				end = begin + file.size;
+				blob = new Blob( [ data.subarray( begin, end ) ], { type: file.type } );
+				this.resps[ file.url ] = new Response( blob );
 
-		}, 0 );
+				return end;
 
+			}, 0 );
+
+		}//
 
 		this.active = true;
 		this.resolve();
 
 	}
 
-	async update ( cn, pn, rp, st, ct ) {
+	async update ( pack, cache, url, req, stag, ctag ) {
 
-		cn = 'datapacks';
-		pn = '/app/datapack';
-		rp = new Request( pn );
+		cache = 'datapacks';
+		url = '/app/datapack-' + pack;
+		req = new Request( url );
 
-		st = ( await rwoc( pn, { method: 'HEAD' } ) ).headers.get( 'etag' );
-		ct = ( await caches.match( rp ) )?.headers.get( 'etag' );
+		stag = ( await fetch( url, { method: 'HEAD', cache: 'no-store' } ) ).headers.get( 'etag' );
+		ctag = ( await caches.match( req ) )?.headers.get( 'etag' );
 
-		if ( ct != st )
+		if ( ctag != stag )
 
-			await caches.open( cn ).then( async c => c.put( rp, await rwoc( pn ) ) );
+			await caches.open( cache ).then( async c => c.put( req, await fetch( url, { cache: 'no-store' } ) ) );
 
-		return await caches.match( rp );
+		return await caches.match( req );
 
 	}
 
@@ -92,6 +92,6 @@ self.addEventListener( 'fetch', ( event, url ) => {
 
 		event.respondWith( imc.ready.then( () =>
 
-			( imc.match( url ), imc.response || rwoc( url ) ) ) );
+			( imc.match( url ), imc.response || fetch( url, { cache: 'no-store' } ) ) ) );
 
 });

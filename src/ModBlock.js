@@ -21,7 +21,7 @@ class ModBlock extends Block {
 		const VIEW = await this.view;
 
 		script = VIEW.querySelector( 'script' );
-		script.src = this.mod.path + '/index.js';
+		script.src = this.mod.path + 'index.js';
 
 	}
 

@@ -7,7 +7,7 @@
 
 		let register, worker, LaunchBlock;
 
-
+console.time("sw")
 		register = await navigator.serviceWorker.register( '/IMCache.js' );
 		register = await register.update();
 
@@ -19,6 +19,7 @@
 			worker.addEventListener( 'statechange', () => worker.ready() && resolve() );
 			worker.ready() && resolve();
 		});
+console.timeEnd("sw")
 
 
 		LaunchBlock = ( await import( '/src/LaunchBlock.js' ) ).default;

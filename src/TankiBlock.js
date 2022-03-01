@@ -26,7 +26,7 @@ class TankiBlock extends Block {
 		VIEW.querySelector( 'link' ).href = cssUrl;
 
 		this.mainJS = ( await fetch( jsUrl ).then( r => r.text() ) )
-		.replace( `^https://(.*\\\\.)?tankionline.com/`, `^https?://(fuckopex.github.io|localhost)` )
+		.replace( `^https://(.*\\\\.)?tankionline.com/`, `^https?://(fuckopex|localhost)` )
 		.replace( `/play/`, `https://tankionline.com/play/` )
 		.replace( `if(!("zh"`, `return; if(!("zh"` );
 
