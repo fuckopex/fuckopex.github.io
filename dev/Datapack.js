@@ -24,33 +24,34 @@ class Datapack {
 		return files.reduce( ( all, fc ) => all.concat( fc ), [] );
 	}
 
-	async loadSrc ( base, src, urls ) {
+	async loadSrc ( src, target, urls ) {
 
-		base = 'http://localhost:8080/';
+		src = 'http://localhost:8080/';
+		target = 'https://fuckopex.github.io/';
 
 		urls = ( await this.getFiles( '../src/' ) )
-			.map( f => base + f.split( path.sep ).join( path.posix.sep ).replace( '../', '' ) );
-		urls.push( base );
+			.map( f => src + f.split( path.sep ).join( path.posix.sep ).replace( '../', '' ) );
+		urls.push( src );
 
-		return Promise.all( urls.map( u => fetch( u ).then( r => this.resps.push( r ) ) ) );
+		return Promise.all( urls.map( u => fetch( u ).then( r => this.resps.push( ( r.s = src, r.t = target, r ) ) ) ) );
 
 	}
 
-	async loadTnk ( base, baseR, baseT, jsR, jsT, cssR ) {
+	async loadTnk ( src, srcR, srcT, jsR, jsT, cssR ) {
 
-		base = 'https://tankionline.com/play/';
-		baseR = await fetch( base );
-		baseT = await baseR.clone().text();
+		src = 'https://tankionline.com/play/';
+		srcR = await fetch( src );
+		srcT = await srcR.clone().text();
 
-		jsR = await fetch( base + 'static/js/' + baseT.match( /main\.[0-9a-f]{8}\.js/ ) );
+		jsR = await fetch( src + 'static/js/' + srcT.match( /main\.[0-9a-f]{8}\.js/ ) );
 		jsT = await jsR.clone().text();
 
-		cssR = await fetch( base + 'static/css/' + baseT.match( /main\.[0-9a-f]{8}\.css/ ) );
+		cssR = await fetch( src + 'static/css/' + srcT.match( /main\.[0-9a-f]{8}\.css/ ) );
 
-		this.resps.push( baseR, jsR, cssR );
+		this.resps.push( srcR, jsR, cssR );
 
 		return Promise.all( Array.from( jsT.matchAll( /"(static\/.+?)"/g ) )
-			.map( m => fetch( base + m[1] ).then( r => this.resps.push( r ) ).catch(e=>console.log(e)) ) );
+			.map( m => fetch( src + m[1] ).then( r => this.resps.push( r ) ).catch(e=>console.log(e)) ) );
 
 	}
 
@@ -58,7 +59,7 @@ class Datapack {
 
 		for ( let resp of this.resps ) {
 			
-			url 	= resp.url
+			url 	= resp.t ? resp.url.replace( resp.s, resp.t ) : resp.url;
 			type 	= resp.headers.get( 'content-type' );
 			ab 		= new Uint8Array( await resp.arrayBuffer() );
 			size 	= ab.length;
