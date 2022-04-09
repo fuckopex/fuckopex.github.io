@@ -44,7 +44,7 @@ class Test {
 
 			if ( n == '.tanks.clients.html5.lobby.common.loader.ApplicationLoaderComponent' ) {
 
-				f.prototype.updateCurrentTip_0 = function() {};
+				//f.prototype.updateCurrentTip_0 = function() {};
 
 			}
 
