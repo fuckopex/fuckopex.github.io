@@ -26,7 +26,7 @@ class Datapack {
 
 	async loadSrc ( src, target, urls ) {
 
-		src = 'http://localhost:8080/';
+		src = 'http://localhost:9090/';
 		target = 'https://fuckopex.github.io/';
 
 		urls = ( await this.getFiles( '../src/' ) )
@@ -71,7 +71,7 @@ class Datapack {
 
 		this.data.unshift( Buffer.from( JSON.stringify( this.meta ) ) );
 
-		await fs.writeFile( '../app/datapack-' + pack, Buffer.concat( this.data ) );
+		await fs.writeFile( '../app/' + pack + '.pkg', Buffer.concat( this.data ) );
 
 	}
 

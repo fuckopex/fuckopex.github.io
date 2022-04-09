@@ -1,0 +1,180 @@
+/*@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(/src/assets/rubik/cyrillic-400.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(/src/assets/rubik/latin-400.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url(/src/assets/rubik/cyrillic-500.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url(/src/assets/rubik/latin-500.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url(/src/assets/rubik/cyrillic-600.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url(/src/assets/rubik/latin-600.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}*/
+
+@font-face {
+	font-family: Rubik;
+	src: url('/src/assets/rubik[wght].ttf') format('truetype-variations');
+	font-weight: 300 900;
+}
+
+:root {
+
+	--gray-300: #d1d5db;
+	--gray-400: #9ca3af;
+	--gray-600: #4b5563;
+
+	--orange-100: #ffedd5;
+	--orange-600: #ea580c;
+
+	--yellow-100: #fef9c3;
+	--yellow-600: #ca8a04;
+
+	--emerald-100: #d1fae5;
+	--emerald-600: #059669;
+
+	--cyan-100: #cffafe;
+
+	--blue-100: #dbeafe;
+	--blue-600: #2563eb;
+
+	--fuchsia-100: #fae8ff;
+	--rose-100: #ffe4e6;
+
+	--size-small: 1.9vh;
+	--size-medium: 2.3vh;
+	--size-big: 4.5vh;
+
+}
+
+body {
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	font-family: Rubik;
+	background: no-repeat bottom right/40vh url('girl.svg');
+	user-select: none;
+}
+
+[header] {
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: var(--size-big);
+	font-weight: 600;
+	color: var(--gray-300);
+}
+
+[mods] {
+	height: 62vh;
+	display: flex;
+    justify-content: center;
+
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+[mod] {
+	width: 27vh;
+	height: 22vh;
+	padding: 3vh 3.5vh;
+	margin: 1.5vh;
+	border-radius: 2vh;
+
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	flex: 0 0 auto;
+
+	background: linear-gradient(35deg, var(--clr-s) 10%, var(--clr-e) 90%);
+}
+
+[mod-type="L"] { display: flex; --clr-s: var(--yellow-100); --clr-e: var(--orange-100); --clr-t: var(--yellow-600); }
+[mod-type="T"] { display: flex; --clr-s: var(--orange-100); --clr-e: var(--rose-100); --clr-t: var(--orange-600); }
+[mod-type="S"] { display: flex; --clr-s: var(--emerald-100); --clr-e: var(--cyan-100); --clr-t: var(--emerald-600); }
+[mod-type="U"] { display: flex; --clr-s: var(--blue-100); --clr-e: var(--fuchsia-100); --clr-t: var(--blue-600); }
+
+[mod] > * {
+	overflow: hidden;
+}
+
+[mod-name] {
+	font-size: var(--size-medium);
+	font-weight: 500;
+	white-space: nowrap;
+	color: var(--clr-t);
+}
+
+[mod-desc] {
+	height: 14vh;
+	font-size: var(--size-small);
+	font-weight: 400;
+	white-space: pre-wrap;
+	color: var(--gray-600);
+}
+
+[mod-launch] {
+	font-size: var(--size-small);
+	font-weight: 500;
+	color: var(--clr-t);
+	cursor: pointer;
+}
+
+[mod-launch]:hover {
+	text-decoration: underline;
+}
+
+[footer] {
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: var(--size-small);
+	color: var(--gray-400);
+	overflow: hidden;
+	white-space: nowrap;
+}

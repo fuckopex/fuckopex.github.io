@@ -2,13 +2,8 @@ class IMCache {
 
 	constructor () {
 		
-		this.init();
-
-	}
-
-	init () {
-
-		this.resps = {};
+		this.packs = [ 'entry', 'tanki' ];
+		this.responses = {};
 		this.active = false;
 		this.ready = new Promise( ( r => this.resolve = r ).bind( this ) );
 
@@ -18,9 +13,9 @@ class IMCache {
 
 	async load ( pack, ab, len, meta, data ) {
 
-		for ( pack of [ 'src', 'tnk' ] ) {
+		for ( let name of this.packs ) {
 
-			pack = await this.update( pack );
+			pack = await this.update( name );
 
 			ab = new Uint8Array( await pack.arrayBuffer() );
 			len = ab.indexOf( 0x5D );
@@ -31,23 +26,23 @@ class IMCache {
 
 				end = begin + file.size;
 				blob = new Blob( [ data.subarray( begin, end ) ], { type: file.type } );
-				this.resps[ file.url ] = new Response( blob );
+				this.responses[ file.url ] = new Response( blob );
 
 				return end;
 
 			}, 0 );
 
-		}//
+		}
 
 		this.active = true;
 		this.resolve();
 
 	}
 
-	async update ( pack, cache, url, req, stag, ctag ) {
+	async update ( name, cache, url, req, stag, ctag ) {
 
 		cache = 'datapacks';
-		url = '/app/datapack-' + pack;
+		url = '/app/' + name + '.pkg';
 		req = new Request( url );
 
 		stag = ( await fetch( url, { method: 'HEAD', cache: 'no-store' } ) ).headers.get( 'etag' );
@@ -63,7 +58,7 @@ class IMCache {
 
 	match ( url ) {
 		
-		this.response = this.resps[ url ]?.clone();
+		this.response = this.responses[ url ]?.clone();
 
 		return this.response ? true : false;
 

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+	
+	<title>FUCKOPEX</title>
+	<meta charset="utf-8">
+	<link rel="icon" href="/src/assets/favicon.ico">
+
+</head>
 <body>
 
 	<script type="module">
 
-		let register, worker, LaunchBlock;
-
+		let register, worker;
 
 		register = await navigator.serviceWorker.register( '/IMCache.js' );
 		register = await register.update();
@@ -21,9 +26,7 @@
 		});
 
 
-		LaunchBlock = ( await import( '/src/LaunchBlock.js' ) ).default;
-		LaunchBlock.init();
-		LaunchBlock.launch();
+		import( '/src/Entry.js' );
 
 	</script>
 
