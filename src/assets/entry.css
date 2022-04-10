@@ -111,8 +111,11 @@ body {
 }
 
 [mod-launch]:hover {
-	text-decoration: underline;
+	text-decoration: underline;visibility: visible;
 }
+
+[hidden="true"] { visibility: hidden; }
+[hidden="false"] { visibility: visible; }
 
 [footer] {
 	height: 10vh;

@@ -1,4 +1,3 @@
-import Tanki from '/src/Tanki.js';
 import Mods from '/src/Mods.js';
 
 class Test {
@@ -9,26 +8,24 @@ class Test {
 
 	async launch () {
 
-		await Tanki.init();
+		this.configResources();
+		this.configAnother();
 
-		this.main();
-
-		await Tanki.launch();
+		Mods.Tanki.launch();
 
 	}
 
-	async main () {
+	configResources () {
+
+		Mods.Replacer.use( [
+
+			[ /mp3$/, 		'/src/mods/test/assets/null.mp3' ],
+
+		]);
 
 		Mods.Replacer.use( [
 
 			[ /background\/.+?\.webp/, 				'/src/mods/test/assets/background.webp' ],
-
-			[ /ambient_garage.e264b863.mp3/, 		'/src/mods/test/assets/null.mp3' ],
-			[ /ambient_lobby.33953f6f.mp3/, 		'/src/mods/test/assets/null.mp3' ],
-			[ /ambient_shop.be7f234a.mp3/, 			'/src/mods/test/assets/null.mp3' ],
-			[ /battle_finish.b3544931.mp3/, 		'/src/mods/test/assets/null.mp3' ],
-			[ /entrance_background.4a17065c.mp3/, 	'/src/mods/test/assets/null.mp3' ],
-			[ /new_year_theme.cde4eac4.mp3/, 		'/src/mods/test/assets/null.mp3' ],
 
 			[ /27565450061130\/.+?\.webp/, 			'/src/mods/test/assets/garage/null.webp' ],
 			[ /27565450061130\/object.3ds/, 		'/src/mods/test/assets/garage/view.3ds' ],
@@ -40,11 +37,15 @@ class Test {
 
 		]);
 
+	}
+
+	configAnother () {
+
 		Mods.Packages.use( ( n, f ) => {
 
 			if ( n == '.tanks.clients.html5.lobby.common.loader.ApplicationLoaderComponent' ) {
 
-				//f.prototype.updateCurrentTip_0 = function() {};
+				f.prototype.updateCurrentTip_0 = function() {};
 
 			}
 

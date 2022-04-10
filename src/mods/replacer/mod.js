@@ -1,4 +1,4 @@
-import Tanki from '/src/Tanki.js';
+import Mods from '/src/Mods.js';
 
 class Replacer {
 
@@ -12,18 +12,16 @@ class Replacer {
 
 		this.urls = this.urls.concat( urls );
 
-		for ( let match of Array.from( Tanki.mainJS.matchAll( /n\.p\+"(.+?)"/g ) ) ) {
+		for ( let match of Array.from( Mods.Tanki.js.matchAll( /n\.p\+"(.+?)"/g ) ) ) {
 
 			const res = this.match( match[1] );
 
 			if ( res !== match[1] )
-				Tanki.mainJS = 
-				Tanki.mainJS.replace( match[0], `"${ res }"` );
+				Mods.Tanki.replace( match[0], `"${ res }"` );
 
 		}
 
-		Tanki.mainJS = 
-		Tanki.mainJS.replace( /this.local\$(url|path)=(.)/g, 'this.local$$$1=Mods.Replacer.match($2)' );
+		Mods.Tanki.replace( /this.local\$(url|path)=(.)/g, 'this.local$$$1 = Mods.Replacer.match($2)' );
 
 	}
 	

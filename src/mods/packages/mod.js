@@ -1,4 +1,4 @@
-import Tanki from '/src/Tanki.js';
+import Mods from '/src/Mods.js';
 
 class Packages {
 
@@ -13,8 +13,7 @@ class Packages {
 
 		if ( handler ) this.handlers.push( handler );
 
-		Tanki.mainJS = 
-		Tanki.mainJS.replace( 'i.exports}', 'Mods.Packages.parse( i.exports ), i.exports }' );
+		Mods.Tanki.replace( 'i.exports}', 'Mods.Packages.parse( i.exports ), i.exports }' );
 
 	}
 	
@@ -52,9 +51,9 @@ class Packages {
 
 	}
 
-	list () {
+	list ( n ) {
 
-		return Object.keys( this.classes ).join('\n');
+		return Object.keys( this.classes ).filter( cn => cn.match( n ) ).join("\r\n");
 
 	}
 
