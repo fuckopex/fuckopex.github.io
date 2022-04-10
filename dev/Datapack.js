@@ -27,7 +27,8 @@ class Datapack {
 	async loadSrc ( src, target, urls ) {
 
 		src = 'http://localhost:9090/';
-		target = 'https://fuckopex.github.io/';
+		//target = 'https://fuckopex.github.io/';
+		target = 'http://localhost:9090/';
 
 		urls = ( await this.getFiles( '../src/' ) )
 			.map( f => src + f.split( path.sep ).join( path.posix.sep ).replace( '../', '' ) );
@@ -79,7 +80,7 @@ class Datapack {
 
 		pack = process.argv[2];
 
-		if ( pack == 'src' )
+		if ( pack == 'entry' )
 			await this.loadSrc();
 
 		if ( pack == 'tnk' )

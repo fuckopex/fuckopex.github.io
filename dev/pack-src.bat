@@ -1,1 +1,1 @@
-node --experimental-fetch Datapack.js src
+node --experimental-fetch Datapack.js entry
