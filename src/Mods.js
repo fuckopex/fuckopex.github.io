@@ -1,26 +1,35 @@
 class Mods {
 
-	async launch ( mods ) {
+	async launch ( urls, init, mod ) {
 
-		mods = [
+		urls = [
 
-			{ name: 'Tanki', 	path: '/src/mods/tanki/mod.js' },
-			//{ name: 'Test2', 	path: '/src/mods/test2.js' },
-			{ name: 'Test', 	path: '/src/mods/test/mod.js' },
-			{ name: 'Replacer', path: '/src/mods/replacer/mod.js' },
-			{ name: 'Packages', path: '/src/mods/packages/mod.js' },
+			'/src/mods/body/mod.js',
+			'/src/mods/tanki/mod.js',
+			'/src/mods/test/mod.js',
+			'/src/mods/packages/mod.js',
+			'/src/mods/replacer/mod.js',
+			'/src/mods/garageoff/mod.js',
+			'/src/mods/clearvision/mod.js',
 			
 		];
 
-		for ( let m of mods ) {
-			
-			this[ m.name ] = ( await import( m.path ) ).default;
-			this[ m.name ].path = m.path;
+		init = [];
+
+		for ( let url of urls ) {
+
+			mod = ( await import( url ) ).default;
+
+			this[ mod.name ] = mod;
+
+			init.push( mod.init?.() );
 
 		}
+
+		await Promise.all( init );
 
 	}
 
 }
 
-export default window.ggg = new Mods;
+export default window._Mods = new Mods;

@@ -1,10 +1,25 @@
 import Mods from '/src/Mods.js';
 
-class Packages {
+class Mod {
 
-	type = "U";
-	name = "Танковые классы";
-	desc = "Доступ к классам танков через cjs.exports";
+	name = 'Packages';
+	type = 'U';
+	title = 'Танковые классы';
+	desc = 'Доступ к классам танков через cjs.exports';
+
+	init () {
+
+		const defineProperty_N = Object.defineProperty;
+
+		Object.defineProperty = function( obj, prop, desc ) {
+
+			desc.configurable = desc.configurable ?? true;
+
+			return defineProperty_N( obj, prop, desc );
+
+		}
+
+	}
 
 	classes = {};
 	handlers = [];
@@ -45,18 +60,41 @@ class Packages {
 
 	}
 
+	gets = {};
+
 	get ( n ) {
 
-		return this.classes[ n ];
+		if ( this.gets[ n ] !== undefined )
+
+			return this.classes[ this.gets[ n ] ];
+
+		else
+
+			return this.classes[  this.gets[ n ] = Object.keys( this.classes ).filter( cn => cn.match( n ) )?.[0] ?? null ];
 
 	}
 
 	list ( n ) {
 
-		return Object.keys( this.classes ).filter( cn => cn.match( n ) ).join("\r\n");
+		console.log( Object.keys( this.classes ).filter( cn => cn.match( n ) ).join( '\n' ) );
 
+	}
+
+	prop ( object, property, length ) {
+
+		const properties = Array.prototype.concat(
+			Object.getOwnPropertyNames( object ),
+			Object.getOwnPropertyNames( object.constructor.prototype )
+		);
+
+		for ( let prop of properties )
+			if ( prop.match( property ) && object[ prop ].length == length )
+				return prop;
+
+		return null;
+		
 	}
 
 }
 
-export default window.PPP = new Packages;
+export default new Mod;

@@ -1,38 +1,11 @@
-class Tanki {
+import Mods from '/src/Mods.js';
 
-	type = "S";
-	name = "Танки Онлайн";
-	desc = "Чистый клиент (мод)";
+class Mod {
 
-	async launch ( blob, url ) {
-
-		await render( '/src/mods/tanki/play.html' );
-
-		document.querySelector( '[main-css]' ).href = this.css;
-		document.querySelector( 'html' ).classList.add( 'GlobalStyle-html' );
-		document.querySelector( 'body' ).classList.add( 'GlobalStyle-body' );
-
-		window.fbq = () => null;
-		window.gtag = () => null;
-
-		blob = new Blob( [ this.js ], { type: "application/javascript" } );
-		url = URL.createObjectURL( blob );
-
-		document.querySelector( '[main-js]' ).src = url;
-
-	}
-
-	replace ( f, r ) {
-
-		this.js = this.js.replace( f, r );
-
-	}
-
-	constructor () {
-
-		this.init();
-
-	}
+	name = 'Tanki';
+	type = 'S';
+	title = 'Танки Онлайн';
+	desc = 'Чистый клиент (мод)';
 
 	async init ( url, index, css, js ) {
 
@@ -52,6 +25,36 @@ class Tanki {
 
 	}
 
+	async use ( blob, url ) {
+
+		await Mods.Body.render( '/src/mods/tanki/play.html' );
+
+		document.querySelector( '[main-css]' ).href = this.css;
+		document.querySelector( 'html' ).classList.add( 'GlobalStyle-html' );
+		document.querySelector( 'body' ).classList.add( 'GlobalStyle-body' );
+
+		window.fbq = () => null;
+		window.gtag = () => null;
+
+		blob = new Blob( [ this.js ], { type: 'application/javascript' } );
+		url = URL.createObjectURL( blob );
+
+		document.querySelector( '[main-js]' ).src = url;
+
+	}
+
+	async launch () {
+
+		await this.use();
+
+	}
+
+	replace ( f, r ) {
+
+		this.js = this.js.replace( f, r );
+
+	}
+
 }
 
-export default new Tanki;
+export default new Mod;

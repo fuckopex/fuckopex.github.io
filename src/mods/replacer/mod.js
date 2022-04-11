@@ -1,23 +1,23 @@
 import Mods from '/src/Mods.js';
 
-class Replacer {
+class Mod {
 
-	type = "U";
-	name = "Замена ресурсов";
-	desc = "Таблица замен файлов на основе регулярных выражений";
+	name = 'Replacer';
+	type = 'U';
+	title = 'Замена ресурсов';
+	desc = 'Таблица замен файлов на основе регулярных выражений';
 
 	urls = [];
 
-	use ( urls ) {
+	use ( urls, res ) {
 
 		this.urls = this.urls.concat( urls );
 
-		for ( let match of Array.from( Mods.Tanki.js.matchAll( /n\.p\+"(.+?)"/g ) ) ) {
+		for ( let m of Array.from( Mods.Tanki.js.matchAll( /n\.p\+"(.+?)"/g ) ) ) {
 
-			const res = this.match( match[1] );
+			res = this.match( m[1] );
 
-			if ( res !== match[1] )
-				Mods.Tanki.replace( match[0], `"${ res }"` );
+			if ( res !== m[1] ) Mods.Tanki.replace( m[0], `'${ res }'` );
 
 		}
 
@@ -36,4 +36,4 @@ class Replacer {
 
 }
 
-export default window.gg = new Replacer;
+export default new Mod;
