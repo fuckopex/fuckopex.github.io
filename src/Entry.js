@@ -22,13 +22,13 @@ class Entry {
 			div = tmpl.content.cloneNode( true );
 
 			div.querySelector( '[mod-type]' ).setAttribute( 'mod-type', mod.type );
-			div.querySelector( '[mod-name]' ).textContent = mod.name;
+			div.querySelector( '[mod-title]' ).textContent = mod.title;
 			div.querySelector( '[mod-desc]' ).textContent = mod.desc;
 			div.querySelector( '[mod-launch]' ).addEventListener( 'pointerup', ( event => {
 
 				if ( event.button !== 0 ) return;
 
-				document.title = mod.name;
+				document.title = mod.title;
 				Mods.Body.render();
 				
 				mod.launch();

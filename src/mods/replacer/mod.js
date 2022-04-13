@@ -7,21 +7,20 @@ class Mod {
 	title = 'Замена ресурсов';
 	desc = 'Таблица замен файлов на основе регулярных выражений';
 
+
 	urls = [];
+	hook = false;
 
-	use ( urls, res ) {
+	use ( urls ) {
 
-		this.urls = this.urls.concat( urls );
+		this.urls = urls.concat( this.urls );
 
-		for ( let m of Array.from( Mods.Tanki.js.matchAll( /n\.p\+"(.+?)"/g ) ) ) {
+		if ( ! this.hook++ ) {
 
-			res = this.match( m[1] );
-
-			if ( res !== m[1] ) Mods.Tanki.replace( m[0], `'${ res }'` );
+			Mods.Tanki.replace( /(n\.p\+".+?")/g, `Mods.${ this.name }.match($1)` );
+			Mods.Tanki.replace( /this\.local\$(url|path)=(.)/g, `this.local$$$1=Mods.${ this.name }.match($2)` );
 
 		}
-
-		Mods.Tanki.replace( /this.local\$(url|path)=(.)/g, 'this.local$$$1 = Mods.Replacer.match($2)' );
 
 	}
 	

@@ -39,7 +39,7 @@ class Mod {
 
 			if ( n.match( '.flag.HudMarker' ) ) {
 
-				f.Companion.DEFAULT_VISIBLE_DISTANCE = 0.05;
+				f.Companion.DEFAULT_VISIBLE_DISTANCE = 0;
 
 			}
 
@@ -79,28 +79,27 @@ class Mod {
 			if ( n.match( 'BattleMapComponent' ) ) {
 
 				const CreateMapParams_0 = f.prototype.CreateMapParams_0;
-					
-				f.prototype.CreateMapParams_0 = function() {
 
-					const params = {
-						ambientColor: [ 0.65, 0.78, 0.87, 1 ],
-						lightColor: [ 0.90, 0.69, 0.47, 1 ],
-						lightDirection: [ -0.39, -0.52, -0.75 ],
+				f.prototype.CreateMapParams_0 = function () {
+
+					const params = { 
+						ambientColor: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
+						lightColor: { r: 0.6, g: 0.6, b: 0.6, a: 1 },
+						lightDirection: { x: -0.4, y: -0.5, z: -0.6 },
 					}
 
 					const
 					RESULT = CreateMapParams_0.bind( this )(),
 
-					Color = Mods.Packages.get( '.core.Color' ),
-					Vector3 = Mods.Packages.get( '.math.Vector3' ),
+					Color = Mods.Packages.get( '.core.Color$' ),
+					Vector3 = Mods.Packages.get( '.Vector3$' ),
 
-					copy = Mods.Packages.prop( Color.prototype, 'copy', 1 ),
-					init = Mods.Packages.prop( Vector3.prototype, 'init', 1 ),
-					add = Mods.Packages.prop( Vector3.prototype, 'add', 3 );
+					copy_1 = Mods.Packages.prop( Color.prototype, 'copy', 1 ),
+					init_1 = Mods.Packages.prop( Vector3.prototype, 'init', 1 );
 
-					RESULT.ambientColor[copy]( new Color( ...params.ambientColor ) );
-					RESULT.lightColor[copy]( new Color( ...params.lightColor ) );
-					RESULT.lightDirection[init]( (new Vector3)[add]( ...params.lightDirection ) );
+					RESULT.ambientColor[copy_1]( params.ambientColor );
+					RESULT.lightColor[copy_1]( params.lightColor );
+					RESULT.lightDirection[init_1]( params.lightDirection );
 
 					return RESULT;
 

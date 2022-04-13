@@ -4,6 +4,8 @@ class Mods {
 
 		urls = [
 
+			'/src/mods/beautifier/mod.js',
+			'/src/mods/runcustomfile/mod.js',
 			'/src/mods/body/mod.js',
 			'/src/mods/tanki/mod.js',
 			'/src/mods/test/mod.js',
@@ -11,6 +13,7 @@ class Mods {
 			'/src/mods/replacer/mod.js',
 			'/src/mods/garageoff/mod.js',
 			'/src/mods/clearvision/mod.js',
+			'/src/mods/uiimprove/mod.js',
 			
 		];
 

@@ -7,33 +7,38 @@ class Mod {
 	title = 'Танковые классы';
 	desc = 'Доступ к классам танков через cjs.exports';
 
+
 	init () {
 
-		const defineProperty_N = Object.defineProperty;
+		const defineProperty = Object.defineProperty;
 
 		Object.defineProperty = function( obj, prop, desc ) {
 
 			desc.configurable = desc.configurable ?? true;
 
-			return defineProperty_N( obj, prop, desc );
+			return defineProperty( obj, prop, desc );
 
 		}
 
 	}
 
-	classes = {};
 	handlers = [];
+	hook = false;
 
 	use ( handler ) {
 
 		if ( handler ) this.handlers.push( handler );
 
-		Mods.Tanki.replace( 'i.exports}', 'Mods.Packages.parse( i.exports ), i.exports }' );
+		if ( ! this.hook++ ) {
+
+			Mods.Tanki.replace( /i\.exports}/, `Mods.${ this.name }.parse( i.exports ),i.exports}` );
+
+		}
 
 	}
 	
 	parse ( exp, pkg = '', i = 0 ) {
-
+//if ( exp.Kind ) console.log( exp );
 		if ( exp.constructor !== Object ) return;
 
 		for ( let k of Object.keys( exp ).filter( k => k != '$$importsForInline$$' ) ) {
@@ -44,13 +49,15 @@ class Mod {
 
 				this.parse( exp[ k ], `${ pkg }.${ k }`, i + 1 );
 
-			else if ( exp[ k ].$metadata$ )
+			else if ( exp[ k ]/*.$metadata$*/ )
 					
 				this.handle( `${ pkg }.${ k }`, exp[ k ] );
 
 		}
 
 	}
+
+	classes = {};
 
 	handle ( n, f ) {
 
@@ -70,7 +77,7 @@ class Mod {
 
 		else
 
-			return this.classes[  this.gets[ n ] = Object.keys( this.classes ).filter( cn => cn.match( n ) )?.[0] ?? null ];
+			return this.classes[ this.gets[ n ] = Object.keys( this.classes ).filter( cn => cn.match( n ) )?.[0] ?? null ];
 
 	}
 

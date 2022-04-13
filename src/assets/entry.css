@@ -88,7 +88,7 @@ body {
 	overflow: hidden;
 }
 
-[mod-name] {
+[mod-title] {
 	font-size: var(--size-medium);
 	font-weight: 500;
 	white-space: nowrap;
@@ -113,6 +113,18 @@ body {
 [mod-launch]:hover {
 	text-decoration: underline;visibility: visible;
 }
+
+[mod-gg] {
+	width: 2vh;
+    height: 2vh;
+    border-radius: 50%;
+    background: linear-gradient(35deg, var(--clr-s) 10%, var(--clr-e) 90%);
+}
+[mod-gg="L"] { --clr-s: var(--yellow-100); --clr-e: var(--orange-100); }
+[mod-gg="T"] { --clr-s: var(--orange-100); --clr-e: var(--rose-100); }
+[mod-gg="S"] { --clr-s: var(--emerald-100); --clr-e: var(--cyan-100); }
+[mod-gg="U"] { --clr-s: var(--blue-100); --clr-e: var(--fuchsia-100); }
+
 
 [hidden="true"] { visibility: hidden; }
 [hidden="false"] { visibility: visible; }

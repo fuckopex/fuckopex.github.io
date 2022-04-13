@@ -6,6 +6,7 @@ class Mod {
 	type = 'S';
 	title = 'Танки Онлайн';
 	desc = 'Чистый клиент (мод)';
+	
 
 	async init ( url, index, css, js ) {
 

@@ -5,32 +5,13 @@ class Mod {
 	name = 'Test';
 	type = 'T';
 	title = 'Тест-1';
-	desc = 'Общая тестовая компиляция из утилит';
+	desc = 'Общая тестовая компиляция';
 
 	async launch () {
 
 		Mods.GarageOff.use();
 		Mods.ClearVision.use();
-
-		Mods.Packages.use( ( n, f ) => {
-
-			if ( n.match( 'ApplicationLoaderComponent' ) ) {
-
-				f.prototype.onWillMount = function () {};
-
-			}
-
-		} );
-
-		Mods.Packages.use( ( n, f ) => {
-
-			if ( n.match( 'AnnouncementHomeScreenComponent' ) ) {
-
-				f.prototype.componentDidMount = function () {};
-
-			}
-
-		} );
+		Mods.UIImprove.use();
 
 		Mods.Tanki.use();
 
