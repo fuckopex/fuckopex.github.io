@@ -19,7 +19,6 @@
 		worker = register.installing || register.waiting || register.active;
 		worker.ready = () => worker.state == 'activated';
 
-
 		await new Promise( resolve => {
 			worker.addEventListener( 'statechange', () => worker.ready() && resolve() );
 			worker.ready() && resolve();

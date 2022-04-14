@@ -2,25 +2,25 @@ import Mods from '/src/Mods.js';
 
 class Mod {
 
-	name = 'Replacer';
+	name = 'ResReplace';
 	type = 'U';
 	title = 'Замена ресурсов';
 	desc = 'Таблица замен файлов на основе регулярных выражений';
 
 
+	used = false;
 	urls = [];
-	hook = false;
 
-	use ( urls ) {
+	use ( ...urls ) {
 
-		this.urls = urls.concat( this.urls );
-
-		if ( ! this.hook++ ) {
+		if ( ! this.used++ ) {
 
 			Mods.Tanki.replace( /(n\.p\+".+?")/g, `Mods.${ this.name }.match($1)` );
 			Mods.Tanki.replace( /this\.local\$(url|path)=(.)/g, `this.local$$$1=Mods.${ this.name }.match($2)` );
 
 		}
+
+		this.urls = urls.concat( this.urls );
 
 	}
 	

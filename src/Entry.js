@@ -2,42 +2,60 @@ import Mods from '/src/Mods.js';
 
 class Entry {
 
-	constructor () {
+	init () {
 
-		this.launch();
+		HTMLBodyElement.prototype.render = async function ( obj, fragment ) {
+
+			document.body.replaceWith( document.createElement( 'body' ) );
+
+			if ( obj === undefined ) return;
+
+			if ( typeof obj === 'string' ) fragment = await fetch( obj )
+				.then( r => r.text() )
+				.then( t => document.createRange().createContextualFragment( t ) );
+
+			if ( obj instanceof HTMLElement ) fragment = obj;
+
+			document.body.append( fragment );
+
+		}
 
 	}
 
-	async launch ( tmpl, mods, div ) {
+	async launch ( div ) {
 
-		await Mods.launch();
+		await Mods.init();
 
-		await Mods.Body.render( '/src/assets/entry.html' );
+		await document.body.render( '/src/assets/entry.html' );
 
-		tmpl = document.querySelector( 'template' );
-		mods = document.querySelector( '[mods]' );
+		for ( let mod of Object.values( Mods ) ) {
 
-		for ( let mod of Object.values( Mods ).filter( m => m.launch ) ) {
-
-			div = tmpl.content.cloneNode( true );
+			div = document.querySelector( 'template' ).content.cloneNode( true );
 
 			div.querySelector( '[mod-type]' ).setAttribute( 'mod-type', mod.type );
 			div.querySelector( '[mod-title]' ).textContent = mod.title;
 			div.querySelector( '[mod-desc]' ).textContent = mod.desc;
-			div.querySelector( '[mod-launch]' ).addEventListener( 'pointerup', ( event => {
+			div.querySelector( '[mod-launch]' ).addEventListener( 'pointerup', event => {
 
 				if ( event.button !== 0 ) return;
 
 				document.title = mod.title;
-				Mods.Body.render();
+				document.body.render();
 				
-				mod.launch();
+				mod.launch?.();
 
-			}).bind( this ));
+			});
 
-			mods.append( div );
+			document.querySelector( '[mods]' ).append( div );
 
 		}
+
+	}
+
+	constructor () {
+
+		this.init();
+		this.launch();
 
 	}
 

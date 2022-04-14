@@ -17,7 +17,7 @@ class Mod {
 
 	use () {
 
-		Mods.Tanki.js = this.js;
+		Mods.Tanki.js = 'console.log(2)'//this.js;
 
 	}
 

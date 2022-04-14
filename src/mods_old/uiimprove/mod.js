@@ -9,6 +9,12 @@ class Mod {
 
 	use () {
 
+		Mods.Replacer.use( [
+
+			[ /videoplay.{10}webp/, '/src/mods/uiimprove/transparent.webp' ],
+
+		]);
+
 		Mods.Packages.use( ( n, f ) => {
 
 			if ( n.match( 'ApplicationLoaderComponent' ) ) {

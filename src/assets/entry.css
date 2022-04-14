@@ -79,10 +79,10 @@ body {
 	background: linear-gradient(35deg, var(--clr-s) 10%, var(--clr-e) 90%);
 }
 
-[mod-type="L"] { display: flex; --clr-s: var(--yellow-100); --clr-e: var(--orange-100); --clr-t: var(--yellow-600); }
-[mod-type="T"] { display: flex; --clr-s: var(--orange-100); --clr-e: var(--rose-100); --clr-t: var(--orange-600); }
-[mod-type="S"] { display: flex; --clr-s: var(--emerald-100); --clr-e: var(--cyan-100); --clr-t: var(--emerald-600); }
+[mod-type="D"] { display: flex; --clr-s: var(--yellow-100); --clr-e: var(--orange-100); --clr-t: var(--yellow-600); }
 [mod-type="U"] { display: flex; --clr-s: var(--blue-100); --clr-e: var(--fuchsia-100); --clr-t: var(--blue-600); }
+[mod-type="T"] { display: flex; --clr-s: var(--emerald-100); --clr-e: var(--cyan-100); --clr-t: var(--emerald-600); }
+[mod-type="C"] { display: flex; --clr-s: var(--orange-100); --clr-e: var(--rose-100); --clr-t: var(--orange-600); }
 
 [mod] > * {
 	overflow: hidden;
