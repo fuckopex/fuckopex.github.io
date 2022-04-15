@@ -1,5 +1,3 @@
-import Mods from '/src/Mods.js';
-
 class Mod {
 
 	name = 'ResReplace';
@@ -8,12 +6,11 @@ class Mod {
 	desc = 'Таблица замен файлов на основе регулярных выражений';
 
 
-	used = false;
 	urls = [];
 
 	use ( ...urls ) {
 
-		if ( ! this.used++ ) {
+		if ( ! this.used && ( this.used = true ) ) {
 
 			Mods.Tanki.replace( /(n\.p\+".+?")/g, `Mods.${ this.name }.match($1)` );
 			Mods.Tanki.replace( /this\.local\$(url|path)=(.)/g, `this.local$$$1=Mods.${ this.name }.match($2)` );

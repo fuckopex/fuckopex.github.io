@@ -1,5 +1,3 @@
-import Mods from '/src/Mods.js';
-
 class Mod {
 
 	name = 'BeautyMJS';
@@ -10,7 +8,7 @@ class Mod {
 
 	async init () {
 
-		await import( './beautifier.js' );
+		await import( `${ this.pwd }/beautifier.js` );
 
 	}
 

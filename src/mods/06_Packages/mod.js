@@ -1,5 +1,3 @@
-import Mods from '/src/Mods.js';
-
 class Mod {
 
 	name = 'Packages';
@@ -22,12 +20,11 @@ class Mod {
 
 	}
 
-	used = false;
 	hooks = [];
 
 	use ( ...hooks ) {
 
-		if ( ! this.used++ ) {
+		if ( ! this.used && ( this.used = true ) ) {
 			
 			Mods.Tanki.replace( /i\.exports}/, `Mods.${ this.name }.parse( i.exports ),i.exports}` );
 
@@ -52,7 +49,7 @@ class Mod {
 
 			if ( desc.value?.constructor == Object )
 
-				this.parse( desc.value, name );
+				this.hook( name, desc ), this.parse( desc.value, name );
 
 			else
 
@@ -63,18 +60,22 @@ class Mod {
 	}
 
 	packages = {};
+	pids = {};
 
-	hook ( fullname, descriptor ) {
+	hook ( fullname, descriptor, pid ) {
+
+		pid = this.pids[ fullname ] = ( this.pids[ fullname ] ?? 0 ) + 1;
+		fullname = `${ fullname }:${ pid }`;
 
 		Object.defineProperty( this.packages, fullname, descriptor );
 
 		for ( let hook of this.hooks )
-			if ( fullname.match( hook[0] ) )
+		if ( fullname.match( hook[0] ) )
 
-				if ( Object.hasOwn( descriptor, 'value' ) )
-					hook[1]( descriptor.value );
-				else
-					hook[1]( descriptor.get() );
+			if ( Object.hasOwn( descriptor, 'value' ) )
+				hook[1]( descriptor.value );
+			else
+				hook[1]( descriptor.get() );			
 
 	}
 
@@ -106,17 +107,15 @@ class Mod {
 		);
 
 		for ( let prop of properties )
-		if ( prop.match( property ) ) {
+		if ( prop.match( property ) )
 
 			if ( typeof object[ prop ] == 'function' ) {
 
 				if ( object[ prop ].length == length ) return prop;
 			
 			}
-
+			
 			else return prop;
-
-		}
 
 		return null;
 		

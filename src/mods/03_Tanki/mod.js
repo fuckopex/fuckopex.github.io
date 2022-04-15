@@ -1,7 +1,3 @@
-import Mods from '/src/Mods.js';
-
-const dir = import.meta.url.replace( '/mod.js', '' );
-
 class Mod {
 
 	name = 'Tanki';
@@ -30,7 +26,7 @@ class Mod {
 
 	async use ( blob, url ) {
 
-		await document.body.render( `${ dir }/play.html` );
+		await document.body.render( `${ this.pwd }/play.html` );
 
 		document.querySelector( '[main-css]' ).href = this.css;
 		document.querySelector( 'html' ).classList.add( 'GlobalStyle-html' );

@@ -1,6 +1,6 @@
 class Mods {
 
-	async init ( urls, inits = [] ) {
+	async init ( urls ) {
 
 		urls = [
 
@@ -14,22 +14,31 @@ class Mods {
 
 			'/src/mods/09_UI+/mod.js',
 			'/src/mods/10_GarageOff/mod.js',
-			'/src/mods/11_Vision+/mod.js',
+			'/src/mods/11_Vision+/mod.js',/**/
 			
 		];
 
-		for ( let url of urls ) inits.push(
+		for ( let url of urls )
 
-			await import( url )
-				.then( m => this[ m.default.name ] = m.default )
-				.then( m => m.init?.() )
-
-		);
-
-		return Promise.all( inits );
+			await this.load( url );
 
 	}
 
+	async load ( url, js, blob, mod ) {
+
+		js = await fetch( url ).then( r => r.text() );
+		js = `import Mods from '${ window.location.origin }/src/Mods.js';\n` + js;
+
+		blob = new Blob( [ js ], { type: 'application/javascript' } );
+		mod = await import( URL.createObjectURL( blob ) ).then( m => m.default );
+
+		mod.pwd = window.location.origin + url.replace( '/' + url.split( '/' ).pop(), '' );
+		await mod.init?.();
+		this[ mod.name ] = mod;
+
+		return mod.name;
+
+	}
 }
 
 export default window._Mods = new Mods;
@@ -71,8 +80,10 @@ C 	Physic++ 			Спидхак, игнор физ. воздействий, пол
 		+ отключены высеры о получении награды за квест
 		+ старые индикаторы урона
 		+ убрать кнопки в битве справа вверху
-		- убрана анимация на кнопке в главном меню
-		- чат показывается более долго и его больше (Как на флеше)
+		+ убрана анимация на кнопке в главном меню
+		+ отключить нахер желтые кружочки в лобби
+		+ добавила мяч наша команда
+		+ в этой битве не начисляется фонд (модальное окно убрать)
 	2. гараж
 		+ отключен весь гараж
 	3. улучшения видимости
@@ -87,6 +98,7 @@ C 	Physic++ 			Спидхак, игнор физ. воздействий, пол
 	5. изменения управления
 		- колесико мыши более интенсивное для вращения камеры
 		- дальность камеры от танка сделать чуть дальше
+		- чат показывается более долго и его больше (Как на флеше)
 
 	6 (чит). видимость
 		- раскрашены танки в цвета команд

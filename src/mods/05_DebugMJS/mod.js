@@ -1,5 +1,3 @@
-import Mods from '/src/Mods.js';
-
 class Mod {
 
 	name = 'DebugMJS';
