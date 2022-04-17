@@ -1,8 +1,8 @@
 class Mod {
 
-	name = 'Battle+';
+	name = 'BetterVisibility';
 	type = 'T';
-	title = 'Битва+';
+	title = 'BetterVisibility';
 	desc = 'описание придумать';
 
 	use () {
@@ -63,6 +63,18 @@ class Mod {
 			[ 'flag.HudMarker:', f => {
 
 				f.Companion.DEFAULT_VISIBLE_DISTANCE = 0;
+
+			}],
+
+			[ 'flag.CommonFlag:', f => {
+
+				const updateSkinAlpha_0 = Mods.Packages.prop( f.prototype, 'updateSkinAlpha', 0 )
+
+				f.prototype[ updateSkinAlpha_0 ] = function () {
+
+					if ( this.skin ) this.skin.alpha = 1;
+
+				}
 
 			}],
 

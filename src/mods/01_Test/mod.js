@@ -7,9 +7,11 @@ class Mod {
 
 	launch () {
 
-		Mods['UI+'].use();
 		Mods['GarageOff'].use();
-		Mods['Battle+'].use();
+		Mods['BetterUI'].use();
+		
+		Mods['CheatVisibility'].use();
+		Mods['CheatWeapon'].use();
 
 		Mods.Tanki.use();
 

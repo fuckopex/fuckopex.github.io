@@ -1,20 +1,30 @@
 class Mods {
 
-	async init ( urls ) {
+	async init ( sd, sn, urls ) {
+
+		sd = '/src/mods/';
+		sn = '/mod.js';
 
 		urls = [
 
-			'/src/mods/01_Test/mod.js',
-			'/src/mods/02_JSasMod/mod.js',
-			'/src/mods/03_Tanki/mod.js',
-			'/src/mods/04_BeautyMJS/mod.js',
-			'/src/mods/05_DebugMJS/mod.js',
-			'/src/mods/06_Packages/mod.js',
-			'/src/mods/07_ResReplace/mod.js',
-			'/src/mods/08_PkgViewer/mod.js',
-			'/src/mods/09_UI+/mod.js',
-			'/src/mods/10_GarageOff/mod.js',
-			'/src/mods/11_Battle+/mod.js',/**/
+			sd + '01_Test' 					+ sn,
+			sd + '02_JSasMod' 				+ sn,
+			sd + '03_Tanki' 				+ sn,
+			sd + '04_BeautyMJS' 			+ sn,
+			sd + '05_DebugMJS' 				+ sn,
+			sd + '06_Packages' 				+ sn,
+			sd + '07_ResReplace' 			+ sn,
+			sd + '08_PkgViewer' 			+ sn,
+			sd + '09_GarageOff' 			+ sn,
+			sd + '10_BetterUI' 				+ sn,
+		//	sd + '11_BetterChat' 			+ sn,
+			sd + '12_BetterVisibility' 		+ sn,
+		//	sd + '13_TinselOff' 			+ sn,
+		//	sd + '14_BetterCollisions' 		+ sn,
+			sd + '15_CheatVisibility' 		+ sn,
+		//	sd + '16_WhiteTextures' 		+ sn,
+			sd + '17_CheatWeapon' 			+ sn,
+		//	sd + '18_CheatPhysic' 			+ sn,
 			
 		];
 
@@ -100,20 +110,20 @@ C 	Physic++ 			Спидхак, игнор физ. воздействий, пол
 		- коллизии в файлах карт объеденены чтоб не спотыкаться
 
 	6 (чит). видимость
-		- раскрашены танки в цвета команд
-		- постоянная обводка танков
-		- ники игроков поверх текстур
-		- ники врагов не скрываются
-		- убраны кусты
-		- мины дальность отрисовки
+		+ убраны кусты
+		+ мины дальность отрисовки
+		+ ники врагов не скрываются
+		+ ники игроков поверх текстур
+		+ постоянная обводка танков
+		+ раскрашены танки в цвета команд
 	7 (чит). белые текстуры
 		- белые текстуры
 		- продырявлены здания
 	8 (чит). вооружение
-		- коллизия всех башен одинакова и чуть больше нормы
-		- увеличенные углы у изиды
-		- сосулька крусейдера только по врагам попадет
 		- гаусс и крусейдер долго целят
+		- увеличенные углы у изиды
+		- коллизия всех башен одинакова и чуть больше нормы
+		- сосулька крусейдера только по врагам попадет
 	9 (чит). физика
 		- майджик на физику боди. черепашка, флеппи, спидхак
 

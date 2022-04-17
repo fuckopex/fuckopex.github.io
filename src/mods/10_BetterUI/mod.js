@@ -1,8 +1,8 @@
 class Mod {
 
-	name = 'UI+';
+	name = 'BetterUI';
 	type = 'T';
-	title = 'Интерфейс+';
+	title = 'BetterUI';
 	desc = 'типа описание';
 
 
@@ -171,6 +171,20 @@ class Mod {
 
 					return getValue_0.bind( this )( ...args );
 
+				}
+
+			}],
+
+			[ 'BattleTabStatisticComponentStyle:', f => {
+
+				const ci = Mods.Packages.prop( f, 'containerInside' );
+				const rs = Mods.Packages.prop( f[ci], 'ruleSets' );
+				const old = f[ci][rs][0];
+				
+				f[ci][rs][0] = function ( t ) {
+					let res = old( t );
+					t.transform = 'scale(1.2)';
+					return res;
 				}
 
 			}],
