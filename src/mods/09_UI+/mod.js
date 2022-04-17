@@ -11,7 +11,6 @@ class Mod {
 		Mods.ResReplace.use(
 
 			[ /background\/.+?webp/, 	`${ this.pwd }/bg.webp` ],
-			[ /videoplay.+?webp/, 		`${ this.pwd }/transparent.webp` ],
 
 		);
 
@@ -37,6 +36,12 @@ class Mod {
 
 			}],
 
+			[ 'AnnouncementHomeScreenComponent:', f => {
+
+				f.prototype.componentDidMount = function () {};
+
+			}],
+
 			[ 'PrimaryMenuItemComponent:', f => {
 
 				f.prototype.notificationIcon_0 = function () {};
@@ -59,9 +64,25 @@ class Mod {
 
 			}],
 
-			[ 'AnnouncementHomeScreenComponent:', f => {
+			[ 'MainScreenComponentStyle:', f => {
 
-				f.prototype.componentDidMount = function () {};
+				const
+				bp = Mods.Packages.prop( f, 'buttonPlay' ),
+				rs = Mods.Packages.prop( f[bp], 'ruleSets' ),
+				old = f[bp][rs][0];
+
+				f[bp][rs][0] = function ( t ) {
+					
+					const
+					clr = Mods.Packages.get( 'lobby.style.Color:' ).greenButtonBattlePickPlay,
+					wa = Mods.Packages.prop( clr, 'withAlpha', 1 ),
+					res = old( t );
+
+					t.backgroundImage = 'none';
+					t.backgroundColor = clr[ wa ]( 0.5 );
+
+					return res;
+				}
 
 			}],
 
@@ -73,27 +94,16 @@ class Mod {
 
 			}],
 
-			[ 'DamageIndicatorComponent:', f => {
+			[ 'BattleSelectParkourWarningDialogComponent:', f => {
 
-				const getTextView_0 = f.prototype.getTextView_0;
+				const render = Mods.Packages.prop( f.prototype, 'render', 1 );
 
-				f.prototype.getTextView_0 = function ( damage, itype, crit, kill, debug ) {
+				f.prototype[ render ] = function () {
 
-					const colors = Mods.Packages.get( 'ColorConstants:' ).Companion;
-					const result = getTextView_0.bind( this )( damage, itype, crit, kill, debug );
+					const dispatch = Mods.Packages.prop( this.gateway_0, 'dispatch', 1 )
+					const fight = Mods.Packages.get( 'ProBattleActions:' ).Fight;
 
-					if ( crit ) {
-
-						if ( itype.name == 'DAMAGE' ) result.color = colors.DAMAGE_YELLOW;
-						if ( itype.name == 'HEAL' ) result.color = colors.DAMAGE_CYAN;
-
-					}
-
-					if ( kill ) result.color = colors.DAMAGE_RED;
-
-					result.fontSize = 16;
-
-					return result;
+					this.gateway_0[ dispatch ]( new fight( this.props.battleId, this.props.battleTeam ) );
 
 				}
 
@@ -120,28 +130,6 @@ class Mod {
 
 			}],
 
-			[ 'MainScreenComponentStyle:', f => {
-
-				const
-				bp = Mods.Packages.prop( f, 'buttonPlay' ),
-				rs = Mods.Packages.prop( f[bp], 'ruleSets' ),
-				old = f[bp][rs][0];
-
-				f[bp][rs][0] = function ( t ) {
-					
-					const
-					clr = Mods.Packages.get( 'lobby.style.Color:' ).greenButtonBattlePickPlay,
-					wa = Mods.Packages.prop( clr, 'withAlpha', 1 ),
-					res = old( t );
-
-					t.backgroundImage = 'none';
-					t.backgroundColor = clr[ wa ]( 0.5 );
-
-					return res;
-				}
-
-			}],
-
 			[ 'RugbyComponent', f => {
 
 				const nfd_2 = Mods.Packages.prop( f.prototype, 'notifyFlagDelivered', 2 );
@@ -164,16 +152,24 @@ class Mod {
 
 			}],
 
-			[ 'BattleSelectParkourWarningDialogComponent:', f => {
+			[ 'JsonLocalizedLoader:', f => {
 
-				const render = Mods.Packages.prop( f.prototype, 'render', 1 );
+				const getValue_0 = f.getValue_0;
 
-				f.prototype[ render ] = function () {
+				f.getValue_0 = function ( ...args ) {
 
-					const dispatch = Mods.Packages.prop( this.gateway_0, 'dispatch', 1 )
-					const fight = Mods.Packages.get( 'ProBattleActions:' ).Fight;
+					if ( ! this.wasHooked ) {
 
-					this.gateway_0[ dispatch ]( new fight( this.props.battleId, this.props.battleTeam ) );
+						this.wasHooked = true;
+
+						const bm = this.values_0['battle']['hud']['battle_message'];
+
+						if ( bm['RUGBY_GOAL_BLUE'] == '%0 забила гол!' ) bm['RUGBY_GOAL_BLUE'] = '%0 забил гол!';
+						if ( bm['RUGBY_GOAL_RED'] == '%0 забила гол!' ) bm['RUGBY_GOAL_RED'] = '%0 забил гол!';
+
+					}
+
+					return getValue_0.bind( this )( ...args );
 
 				}
 

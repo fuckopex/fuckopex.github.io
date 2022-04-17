@@ -93,7 +93,7 @@ class Mod {
 
 	list ( n ) {
 
-		console.log(
+		return (
 			Object.getOwnPropertyNames( this.packages ).filter( fn => fn.match( n ) ).join( '\n' )
 		);
 
