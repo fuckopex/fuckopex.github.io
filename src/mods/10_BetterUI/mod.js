@@ -90,20 +90,35 @@ class Mod {
 
 				const rewardNotify_1 = Mods.Packages.prop( f.prototype, 'rewardNotify', 1 );
 
-				f.prototype[rewardNotify_1] = function () {};
+				f.prototype[ rewardNotify_1 ] = function () {};
 
 			}],
 
-			[ 'BattleSelectParkourWarningDialogComponent:', f => {
+			[ 'JoinToDMBattleComponent:', f => {
 
-				const render = Mods.Packages.prop( f.prototype, 'render', 1 );
+				const teams = Mods.Packages.get( '.battle.team.BattleTeam:' );
+				const fight = Mods.Packages.get( 'ProBattleActions:' ).Fight;
 
-				f.prototype[ render ] = function () {
+				f.prototype.joinToDM_0 = function () {
 
-					const dispatch = Mods.Packages.prop( this.gateway_0, 'dispatch', 1 )
-					const fight = Mods.Packages.get( 'ProBattleActions:' ).Fight;
+					const dispatch_1 = Mods.Packages.prop( this.store, 'dispatch', 1 );
 
-					this.gateway_0[ dispatch ]( new fight( this.props.battleId, this.props.battleTeam ) );
+					if ( this.connectedState.canEnterToBattleByRank && this.connectedState.canEnterToBattleBySize )
+						this.store[ dispatch_1 ]( new fight( this.props.battleId, teams.NONE ) );
+
+				}
+
+			}],
+
+			[ 'JoinToTeamBattleComponent:', f => {
+
+				const fight = Mods.Packages.get( 'ProBattleActions:' ).Fight;
+
+				f.prototype.joinToBattle_0 = function ( t, e ) {
+
+					const dispatch_1 = Mods.Packages.prop( this.store, 'dispatch', 1 );
+
+					this.store[ dispatch_1 ]( new fight( t, e ) );
 
 				}
 

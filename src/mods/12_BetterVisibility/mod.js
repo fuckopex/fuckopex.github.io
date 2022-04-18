@@ -25,6 +25,9 @@ class Mod {
 			[ /27772006503012\/.+?.webp/, 	`${ this.pwd }/bonus/cont.webp` ],
 			[ /27772006526555\/.+?.webp/, 	`${ this.pwd }/bonus/cry.webp` ],
 
+			[ /26561655223021\/.+?webp/, 	`${ this.pwd }/bomb/blue.webp` ],
+			[ /26561655242743\/.+?webp/, 	`${ this.pwd }/bomb/red.webp` ],
+
 		);
 
 		Mods.Packages.use(
@@ -188,6 +191,25 @@ class Mod {
 						h.color = 16744576;
 
 			}],
+
+			[ 'NuclearBangEffect:', f => {
+
+				const play_2 = Mods.Packages.prop( f.prototype, 'play', 2 );
+
+				f.prototype[ play_2 ] = function ( t, e ) {
+
+					const
+					get_pools = Mods.Packages.get( 'get_pools' ),
+					waves = get_pools( e ).nuclearLightWaves.get(),
+					init_2 = Mods.Packages.prop( waves, 'init', 2 ),
+					addGE_1 = Mods.Packages.prop( e, 'addGraphicEffect', 2 );
+
+					waves[ init_2 ]( t, this.waveMaterial_0 );
+					e[ addGE_1 ]( waves );
+
+				}
+
+			} ]
 
 		);
 

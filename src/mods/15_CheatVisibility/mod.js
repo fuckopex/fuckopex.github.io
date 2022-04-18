@@ -11,6 +11,12 @@ class Mod {
 
 		Mods['BetterVisibility'].use();
 
+		Mods.ResReplace.use(
+
+			[ /27570502747446\/object.3ds/, `${ this.pwd }/bomb.3ds` ],
+
+		);
+
 		Mods.Packages.use(
 
 			[ 'BattleMapComponent:', f => {
@@ -93,8 +99,8 @@ class Mod {
 					UserComponent = g( 'UserComponent:' ),
 
 					skinGray = new SkinColorTransformMessage( new ColorTransform( ...[ 0.1, 0.1, 0.1, 1, 150, 150, 150, 1 ] ) ),
-					skinBlue = new SkinColorTransformMessage( new ColorTransform( ...[ 0.1, 0.1, 0.1, 1, 75, 165, 235, 1 ] ) ),
-					skinRed = new SkinColorTransformMessage( new ColorTransform( ...[ 0.1, 0.1, 0.1, 1, 235, 105, 105, 1 ] ) ),
+					skinBlue = new SkinColorTransformMessage( new ColorTransform( ...[ 0.1, 0.1, 0.1, 1, 0, 190, 230, 1 ] ) ),
+					skinRed = new SkinColorTransformMessage( new ColorTransform( ...[ 0.1, 0.1, 0.1, 1, 250, 115, 115, 1 ] ) ),
 
 					hlGray = 2681645,
 					hlBlue = 48870,

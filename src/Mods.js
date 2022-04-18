@@ -17,7 +17,7 @@ class Mods {
 			sd + '08_PkgViewer' 			+ sn,
 			sd + '09_GarageOff' 			+ sn,
 			sd + '10_BetterUI' 				+ sn,
-		//	sd + '11_BetterChat' 			+ sn,
+			sd + '11_BetterChat' 			+ sn,
 			sd + '12_BetterVisibility' 		+ sn,
 		//	sd + '13_TinselOff' 			+ sn,
 		//	sd + '14_BetterCollisions' 		+ sn,
