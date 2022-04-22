@@ -217,5 +217,3 @@ class Mod {
 	};
 
 }
-
-export default new Mod;

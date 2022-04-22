@@ -12,8 +12,21 @@ class Mod {
 
 		if ( ! this.used && ( this.used = true ) ) {
 
+			const mod = this;
+
 			Mods.Tanki.replace( /(n\.p\+".+?")/g, `Mods.${ this.name }.match($1)` );
-			Mods.Tanki.replace( /this\.local\$(url|path)=(.)/g, `this.local$$$1=Mods.${ this.name }.match($2)` );
+			Mods.Tanki.replace( /"url\('"\+(.)\+"'\)"/, `"url('"+Mods.${ this.name }.match($1)+"')"` );
+			Mods.Tanki.replace( /window.fetch\((.+?)\)/g, `Mods.${ this.name }.fetch($1)` );
+
+			const setAttribute = HTMLImageElement.prototype.setAttribute;
+
+			HTMLImageElement.prototype.setAttribute = function ( name, value ) {
+
+				if ( name == 'src' ) value = mod.match( value );
+
+				return setAttribute.bind( this )( name, value );
+
+			}
 
 		}
 
@@ -30,6 +43,10 @@ class Mod {
 
 	}
 
-}
+	fetch ( url ) {
 
-export default new Mod;
+		return window.fetch( this.match( url ) );
+
+	}
+
+}

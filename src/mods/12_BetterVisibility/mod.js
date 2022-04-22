@@ -39,13 +39,13 @@ class Mod {
 				f.prototype.CreateMapParams_0 = function () {
 
 					const params = { 
-						ambientColor: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
-						lightColor: { r: 0.6, g: 0.6, b: 0.6, a: 1 },
-						lightDirection: { x: -0.4, y: -0.5, z: -0.6 },
+						ac: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
+						lc: { r: 0.6, g: 0.6, b: 0.6, a: 1 },
+						ld: { x: -0.4, y: -0.5, z: -0.6 },
 					}
 
 					const
-					RESULT = CreateMapParams_0.bind( this )(),
+					res = CreateMapParams_0.bind( this )(),
 
 					Color = Mods.Packages.get( 'core.Color:' ),
 					Vector3 = Mods.Packages.get( 'Vector3:' ),
@@ -53,11 +53,11 @@ class Mod {
 					copy_1 = Mods.Packages.prop( Color.prototype, 'copy', 1 ),
 					init_1 = Mods.Packages.prop( Vector3.prototype, 'init', 1 );
 
-					RESULT.ambientColor[copy_1]( params.ambientColor );
-					RESULT.lightColor[copy_1]( params.lightColor );
-					RESULT.lightDirection[init_1]( params.lightDirection );
+					res.ambientColor[ copy_1 ]( params.ac );
+					res.lightColor[ copy_1 ]( params.lc );
+					res.lightDirection[ init_1 ]( params.ld );
 
-					return RESULT;
+					return res;
 
 				}
 
@@ -120,6 +120,12 @@ class Mod {
 
 			}],
 
+			[ 'TemperatureComponent:', f => {
+
+				f.prototype.changeTemperature_0 = function () {};
+
+			}],
+
 			[ 'DamageIndicatorComponent:', f => {
 
 				const getTextView_0 = f.prototype.getTextView_0;
@@ -148,7 +154,7 @@ class Mod {
 
 			[ 'MouseLookCameraController:', f => {
 
-				f.Companion.HEIGHT_CHANGE_PER_WHEEL_CLICK_0 = 0.1;
+				f.Companion.HEIGHT_CHANGE_PER_WHEEL_CLICK_0 = 0.085;
 
 			}],
 
@@ -164,8 +170,8 @@ class Mod {
 				const pathDistanceFactor = 1;
 
 				f.prototype[ getPoint_2 ] = function ( t, e ) {
+					e.distance = bz( t, p0_0[0], p1_0[0], p2_0[0], p3_0[0] ) * pathDistanceFactor;
 					e.height = bz( t, p0_0[1], p1_0[1], p2_0[1], p3_0[1] );
-					e.distance = pathDistanceFactor * bz( t, p0_0[0], p1_0[0], p2_0[0], p3_0[0] );
 				}
 
 			}],
@@ -209,7 +215,7 @@ class Mod {
 
 				}
 
-			} ]
+			}],
 
 		);
 
@@ -224,5 +230,3 @@ class Mod {
 	}
 
 }
-
-export default new Mod;

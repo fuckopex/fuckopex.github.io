@@ -176,6 +176,22 @@ class Mod {
 
 			}],
 
+			[ 'BattleBonus:', f => {
+
+				const initLight_0 = f.prototype.initLight_0;
+
+				f.prototype.initLight_0 = function () {
+
+					const res = initLight_0.bind( this )();
+
+					this.bonusMesh.object3d.outlineColor = this.bonusData_0.bonusLight.lightColor.color;
+					this.bonusMesh.object3d.outlined = true;
+
+					return res;
+
+				}
+
+			}],
 		);
 
 	}
@@ -189,6 +205,3 @@ class Mod {
 	}
 
 }
-
-
-export default new Mod;

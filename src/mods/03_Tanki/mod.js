@@ -42,9 +42,9 @@ class Mod {
 
 	}
 
-	async launch () {
+	launch () {
 
-		await this.use();
+		this.use();
 
 	}
 
@@ -55,5 +55,3 @@ class Mod {
 	}
 
 }
-
-export default new Mod;

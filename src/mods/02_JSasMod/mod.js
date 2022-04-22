@@ -42,10 +42,8 @@ class Mod {
 		blob = new Blob( [ this.js ], { type: 'application/javascript' } );
 		url = URL.createObjectURL( blob );
 
-		Mods.load( url ).then( n => Mods[ n ].launch?.() );
+		Mods.load( url ).then( mod => mod.launch?.() );
 
 	}
 
 }
-
-export default new Mod;

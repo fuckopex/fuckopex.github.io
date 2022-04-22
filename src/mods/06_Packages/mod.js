@@ -26,7 +26,7 @@ class Mod {
 
 		if ( ! this.used && ( this.used = true ) ) {
 			
-			Mods.Tanki.replace( /i\.exports}/, `Mods.${ this.name }.parse( i.exports ),i.exports}` );
+			Mods.Tanki.replace( /i.exports}/, `Mods.${ this.name }.parse( i.exports ),i.exports}` );
 
 		}
 
@@ -122,5 +122,3 @@ class Mod {
 	}
 
 }
-
-export default new Mod;

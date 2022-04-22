@@ -7,18 +7,15 @@ class Mod {
 
 	launch () {
 
-		Mods['GarageOff'].use();
-		Mods['BetterUI'].use();
-		Mods['BetterChat'].use();
+		Mods.GarageOff.use();
+		Mods.BetterUI.use();
+		Mods.BetterChat.use();
+	//	Mods.BetterVisibility.use();
 
-		Mods['CheatVisibility'].use();
-		Mods['CheatWeapon'].use();
+		Mods.TinselOff.use();
 
-		Mods.ResReplace.use(
-
-		//	[ /lightmap.webp/, 				`${ this.pwd }/white_1px.webp` ],
-
-		);
+		Mods.CheatVisibility.use();
+		Mods.CheatWeapon.use();
 
 		Mods.Tanki.use();
 
@@ -26,5 +23,3 @@ class Mod {
 	}
 
 }
-
-export default new Mod;

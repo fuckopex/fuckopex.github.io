@@ -1,4 +1,4 @@
-let MAGIC = null;
+let MAGIC = {};
 
 class Mod {
 
@@ -119,6 +119,3 @@ class Mod {
 	}
 
 }
-
-
-export default new Mod;
