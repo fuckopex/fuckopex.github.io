@@ -20,9 +20,9 @@ class Mods {
 			dir + '11_BetterChat' 			+ name,
 			dir + '12_BetterVisibility' 	+ name,
 			dir + '13_TinselOff' 			+ name,
-		//	dir + '14_BetterCollisions' 	+ name,
+			dir + '14_BetterCollisions' 	+ name,
 			dir + '15_CheatVisibility' 		+ name,
-		//	dir + '16_WhiteTextures' 		+ name,
+			dir + '16_WhiteTextures' 		+ name,
 			dir + '17_CheatWeapon' 			+ name,
 		//	dir + '18_CheatPhysic' 			+ name,
 			

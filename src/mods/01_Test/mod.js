@@ -17,6 +17,9 @@ class Mod {
 		Mods.CheatVisibility.use();
 		Mods.CheatWeapon.use();
 
+		Mods.WhiteTextures.use();
+		Mods.BetterCollisions.use();
+
 		Mods.Tanki.use();
 
 

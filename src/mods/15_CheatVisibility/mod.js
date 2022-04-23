@@ -98,11 +98,11 @@ class Mod {
 					Highlighter = g( 'Highlighter:' ),
 					UserComponent = g( 'UserComponent:' ),
 
-					skinGray = new SkinColorTransformMessage( new ColorTransform( ...[ 0.1, 0.1, 0.1, 1, 150, 150, 150, 1 ] ) ),
-					skinBlue = new SkinColorTransformMessage( new ColorTransform( ...[ 0.1, 0.1, 0.1, 1, 0, 190, 230, 1 ] ) ),
-					skinRed = new SkinColorTransformMessage( new ColorTransform( ...[ 0.1, 0.1, 0.1, 1, 250, 115, 115, 1 ] ) ),
+					skinGray = new SkinColorTransformMessage( new ColorTransform( ...[ 0.25, 0.25, 0.25, 1, 15, 70, 100, 1 ] ) ),
+					skinBlue = new SkinColorTransformMessage( new ColorTransform( ...[ 0.25, 0.25, 0.25, 1, 0, 190, 230, 1 ] ) ),
+					skinRed = new SkinColorTransformMessage( new ColorTransform( ...[ 0.25, 0.25, 0.25, 1, 250, 115, 115, 1 ] ) ),
 
-					hlGray = 2681645,
+					hlGray = 1001060,
 					hlBlue = 48870,
 					hlRed = 16744576,
 
