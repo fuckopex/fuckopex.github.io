@@ -34,7 +34,7 @@ class Mod {
 					sg.clear();
 
 					for ( let e of al )
-						if ( e.libraryName !== 'Bush' )
+						if ( ! e.libraryName.match( 'Bush' ) )
 							sg[ add_1 ]( e );
 
 					return setupMap_0.bind( this )();
@@ -192,6 +192,7 @@ class Mod {
 				}
 
 			}],
+
 		);
 
 	}

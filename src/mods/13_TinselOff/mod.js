@@ -27,7 +27,7 @@ class Mod {
 				window.nul = nul;
 
 			}],
-
+/*
 			[ 'ColoringModel:', f => {
 
 				const getColoring = f.prototype.getColoring;
@@ -46,7 +46,7 @@ class Mod {
 				}
 
 			}],
-
+*/
 		);
 
 	}
