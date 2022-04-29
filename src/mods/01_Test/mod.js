@@ -10,7 +10,7 @@ class Mod {
 		Mods.GarageOff.use();
 		Mods.BetterUI.use();
 		Mods.BetterChat.use();
-	//	Mods.BetterVisibility.use();
+		Mods.BetterVisibility.use();
 
 		Mods.TinselOff.use();
 
@@ -18,7 +18,12 @@ class Mod {
 		Mods.CheatWeapon.use();
 
 		Mods.WhiteTextures.use();
-		Mods.BetterCollisions.use();
+
+		Mods.Packages.use(
+
+			
+
+		);
 
 		Mods.Tanki.use();
 

@@ -1,1 +1,1 @@
-node --experimental-fetch Datapack.js tnk
+node --experimental-fetch Datapack.js tanki

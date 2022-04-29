@@ -83,7 +83,7 @@ class Datapack {
 		if ( pack == 'entry' )
 			await this.loadSrc();
 
-		if ( pack == 'tnk' )
+		if ( pack == 'tanki' )
 			await this.loadTnk();
 
 		if ( pack )

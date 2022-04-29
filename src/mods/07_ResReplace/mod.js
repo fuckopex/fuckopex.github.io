@@ -30,7 +30,7 @@ class Mod {
 
 		}
 
-		this.urls = urls.concat( this.urls );
+		this.urls = urls.reverse().concat( this.urls );
 
 	}
 	
