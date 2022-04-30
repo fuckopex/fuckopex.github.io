@@ -1,3 +1,5 @@
+let skyB0;
+
 class Mod {
 
 	name = 'WhiteTextures';
@@ -5,10 +7,17 @@ class Mod {
 	title = 'WhiteTextures';
 	desc = '';
 
+	async init () {
+
+		this.sky = await fetch( `${ this.pwd }/sky.webp` ).then( r => r.blob() );
+
+	}
+
 	use () {
 	
 		Mods.ResReplace.use(
 			
+			[ /big_rock.3ds/, 		`${ this.pwd }/3ds/big_rock.3ds` ],
 			[ /brid_1.3ds/, 		`${ this.pwd }/3ds/brid_1.3ds` ],
 			[ /brid_1_1.3ds/, 		`${ this.pwd }/3ds/brid_1_1.3ds` ],
 			[ /brid_1_2.3ds/, 		`${ this.pwd }/3ds/brid_1_2.3ds` ],
@@ -29,7 +38,10 @@ class Mod {
 			[ /cliff_cor.3ds/, 		`${ this.pwd }/3ds/cliff_cor.3ds` ],
 			[ /cliff_r2.3ds/, 		`${ this.pwd }/3ds/cliff_r2.3ds` ],
 			[ /cliff_ri.3ds/, 		`${ this.pwd }/3ds/cliff_ri.3ds` ],
-			[ /fahwerk.3ds/, 		`${ this.pwd }/3ds/fahwerk.3ds` ],
+			[ /corn1.3ds/, 			`${ this.pwd }/3ds/corn1.3ds` ],
+			[ /fab_tow.3ds/, 		`${ this.pwd }/3ds/fab_tow.3ds` ],
+			[ /fab_tow2.3ds/, 		`${ this.pwd }/3ds/fab_tow2.3ds` ],
+			[ /fahwerk1.3ds/, 		`${ this.pwd }/3ds/fahwerk1.3ds` ],
 			[ /fahwerk2.3ds/, 		`${ this.pwd }/3ds/fahwerk2.3ds` ],
 			[ /gasoline.3ds/, 		`${ this.pwd }/3ds/gasoline.3ds` ],
 			[ /hang_1.3ds/, 		`${ this.pwd }/3ds/hang_1.3ds` ],
@@ -91,6 +103,39 @@ class Mod {
 
 		Mods.ResReplace.use(
 
+			[ /234\/26561235334020\/badgir.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/badgir.3DS` ],
+			[ /234\/26561235334020\/balaro.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/balaro.3DS` ],
+			[ /234\/26561235334020\/broken.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/broken.3DS` ],
+			[ /234\/26561235334020\/carpet.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/carpet.3DS` ],
+			[ /234\/26561235334020\/darvaze.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/darvaze.3DS` ],
+			[ /234\/26561235334020\/door.3DS/, 			`${ this.pwd }/3ds/iran/234/26561235334020/door.3DS` ],
+			[ /234\/26561235334020\/end.3DS/, 			`${ this.pwd }/3ds/iran/234/26561235334020/end.3DS` ],
+			[ /234\/26561235334020\/gonbad.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/gonbad.3DS` ],
+			[ /234\/26561235334020\/gonbadMJ.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/gonbadMJ.3DS` ],
+			[ /234\/26561235334020\/in.3DS/, 			`${ this.pwd }/3ds/iran/234/26561235334020/in.3DS` ],
+			[ /234\/26561235334020\/mehrab.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/mehrab.3DS` ],
+			[ /234\/26561235334020\/menare.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/menare.3DS` ],
+			[ /234\/26561235334020\/out.3DS/, 			`${ this.pwd }/3ds/iran/234/26561235334020/out.3DS` ],
+			[ /234\/26561235334020\/outWd.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/outWd.3DS` ],
+			[ /234\/26561235334020\/saye.3DS/, 			`${ this.pwd }/3ds/iran/234/26561235334020/saye.3DS` ],
+			[ /234\/26561235334020\/stair.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/stair.3DS` ],
+			[ /234\/26561235334020\/tagh.3DS/, 			`${ this.pwd }/3ds/iran/234/26561235334020/tagh.3DS` ],
+			[ /234\/26561235334020\/wall.3DS/, 			`${ this.pwd }/3ds/iran/234/26561235334020/wall.3DS` ],
+			[ /234\/26561235334020\/window.3DS/, 		`${ this.pwd }/3ds/iran/234/26561235334020/window.3DS` ],
+			[ /234\/26561235334020\/wood.3DS/, 			`${ this.pwd }/3ds/iran/234/26561235334020/wood.3DS` ],
+
+			[ /236\/26561301070311\/corner.3DS/, 		`${ this.pwd }/3ds/iran/236/26561301070311/corner.3DS` ],
+			[ /236\/26561301070311\/door.3DS/, 			`${ this.pwd }/3ds/iran/236/26561301070311/door.3DS` ],
+			[ /236\/26561301070311\/end.3DS/, 			`${ this.pwd }/3ds/iran/236/26561301070311/end.3DS` ],
+			[ /236\/26561301070311\/in.3DS/, 			`${ this.pwd }/3ds/iran/236/26561301070311/in.3DS` ],
+			[ /236\/26561301070311\/outWd.3DS/, 		`${ this.pwd }/3ds/iran/236/26561301070311/outWd.3DS` ],
+			[ /236\/26561301070311\/wall.3DS/, 			`${ this.pwd }/3ds/iran/236/26561301070311/wall.3DS` ],
+			[ /236\/26561301070311\/window.3DS/, 		`${ this.pwd }/3ds/iran/236/26561301070311/window.3DS` ],
+
+		);
+
+		Mods.ResReplace.use(
+
 			[ /atlas\d?.webp/, `${ this.pwd }/atlas.webp` ],
 
 		);
@@ -118,6 +163,31 @@ class Mod {
 					return setupMap_0.bind( this )();
 
 				}
+
+				const createSkyBox_0 = f.prototype.createSkyBox_0;
+
+				f.prototype.createSkyBox_0 = function () {
+
+					this.skyboxSides_0.right._texture = skyB0;
+					this.skyboxSides_0.left._texture = skyB0;
+					this.skyboxSides_0.top._texture = skyB0;
+					this.skyboxSides_0.bottom._texture = skyB0;
+					this.skyboxSides_0.front._texture = skyB0;
+					this.skyboxSides_0.back._texture = skyB0;
+
+					return createSkyBox_0.bind( this )();
+
+				}
+
+			}],
+
+			[ 'Bitmap:', async Bitmap => {
+
+				const skyIB = await createImageBitmap( this.sky );
+				const skyB = new Bitmap( skyIB, 1, 1 );
+				const BT = Mods.Packages.get( 'BitmapTexture:' );
+
+				skyB0 = new BT( skyB );
 
 			}],
 
