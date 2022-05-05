@@ -104,9 +104,9 @@ class Mod {
 
 					drgb = ( r, g, b ) => ( r << 16 ) + ( g << 8 ) + b,
 
-					hlGray = drgb( 0, 255, 185 ), //2681645,
-					hlBlue = drgb( 80, 180, 255 ), //48870,
-					hlRed = drgb( 255, 124, 124 ), //16744576,
+					hlGray = drgb( 0, 255, 170 ),
+					hlBlue = drgb( 80, 180, 255 ),
+					hlRed = drgb( 255, 124, 124 ),
 
 					bros = Array.prototype.concat(
 						STORE.state.friends.accepted.toArray(),
