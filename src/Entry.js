@@ -22,18 +22,17 @@ class Entry {
 
 	}
 
-	async launch ( viewer, div ) {
+	async launch ( mods, viewer, title, desc, launch, div ) {
 
 		await Mods.init();
 
 		await document.body.render( '/src/assets/entry.html' );
 
-		viewer = {
-			self: 	document.querySelector( '[viewer]' ),
-			title: 	document.querySelector( '[viewer-title]' ),
-			desc: 	document.querySelector( '[viewer-desc]' ),
-			launch: document.querySelector( '[viewer-launch]' ),
-		}
+		mods 	= document.querySelector( '[mods]' );
+		viewer 	= document.querySelector( '[mod-viewer]' );
+		title 	= document.querySelector( '[mod-title]' );
+		desc 	= document.querySelector( '[mod-desc]' );
+		launch 	= document.querySelector( '[mod-launch]' );
 
 		for ( let mod of Object.values( Mods ) ) {
 
@@ -45,11 +44,11 @@ class Entry {
 
 				if ( event.button !== 0 ) return;
 
-				viewer.self.setAttribute( 'mod-type', mod.type );
-				viewer.title.textContent = `${ mod.title } (${ mod.name })`;
-				viewer.desc.textContent = mod.desc;
-				viewer.launch.textContent = 'Запуск ->';
-				viewer.launch.onpointerup = event => {
+				viewer.setAttribute( 'mod-type', mod.type );
+				title.textContent = mod.title;
+				desc.textContent = mod.desc;
+				launch.textContent = 'Запуск ->';
+				launch.onpointerup = event => {
 
 					if ( event.button !== 0 ) return;
 
@@ -62,7 +61,7 @@ class Entry {
 
 			});
 
-			document.querySelector( '[mods]' ).append( div );
+			mods.append( div );
 
 		}
 

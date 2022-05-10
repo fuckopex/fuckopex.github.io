@@ -7,6 +7,7 @@ class Mod {
 	title = 'WhiteTextures';
 	desc = '';
 
+
 	async init () {
 
 		this.sky = await fetch( `${ this.pwd }/sky.webp` ).then( r => r.blob() );
@@ -15,7 +16,7 @@ class Mod {
 
 	use () {
 	
-		Mods.ResReplace.use(
+		Mods.Resources.use(
 			
 			[ /cliff_0.3ds/, 						`${ this.pwd }/3ds/cliff/cliff_0.3ds` ],
 			[ /cliff_1.3ds/, 						`${ this.pwd }/3ds/cliff/cliff_1.3ds` ],
@@ -108,6 +109,7 @@ class Mod {
 			[ /fahwerk1.3ds/, 						`${ this.pwd }/3ds/fahwerk1.3ds` ],
 			[ /fahwerk2.3ds/, 						`${ this.pwd }/3ds/fahwerk2.3ds` ],
 			[ /hang_1.3ds/, 						`${ this.pwd }/3ds/hang_1.3ds` ],
+			[ /hang_2.3ds/, 						`${ this.pwd }/3ds/hang_2.3ds` ],
 			[ /hang_3.3ds/, 						`${ this.pwd }/3ds/hang_3.3ds` ],
 			[ /hs_tube2.3ds/, 						`${ this.pwd }/3ds/hs_tube2.3ds` ],
 			[ /lighttow.3ds/, 						`${ this.pwd }/3ds/lighttow.3ds` ],
@@ -119,6 +121,7 @@ class Mod {
 			[ /tower.3ds/, 							`${ this.pwd }/3ds/tower.3ds` ],
 			[ /tower_corner.3ds/, 					`${ this.pwd }/3ds/tower_corner.3ds` ],
 			[ /tower_roof.3ds/, 					`${ this.pwd }/3ds/tower_roof.3ds` ],
+			[ /tower_str.3ds/, 						`${ this.pwd }/3ds/tower_str.3ds` ],
 			[ /tube_1.3ds/, 						`${ this.pwd }/3ds/tube_1.3ds` ],
 			[ /tube_2.3ds/, 						`${ this.pwd }/3ds/tube_2.3ds` ],
 			[ /tube_3.3ds/, 						`${ this.pwd }/3ds/tube_3.3ds` ],
@@ -139,7 +142,7 @@ class Mod {
 
 		);
 
-		Mods.ResReplace.use(
+		Mods.Resources.use(
 
 			[ /atlas\d?.webp/, `${ this.pwd }/atlas.webp` ],
 
@@ -148,26 +151,6 @@ class Mod {
 		Mods.Packages.use(
 
 			[ 'BattleMapComponent:', f => {
-
-				const setupMap_0 = f.prototype.setupMap_0;
-
-				f.prototype.setupMap_0 = function () {
-
-					const AL = Mods.Packages.get( 'collections.ArrayList:' );
-					const add_1 = Mods.Packages.prop( AL.prototype, 'add', 1 );
-
-					let sg = this.mapResource_0.map.staticGeometry;
-					let al = sg.toArray();
-
-					sg.clear();
-
-					for ( let e of al )
-						if ( ! e.libraryName.match( 'Bush' ) )
-							sg[ add_1 ]( e );
-
-					return setupMap_0.bind( this )();
-
-				}
 
 				const createSkyBox_0 = f.prototype.createSkyBox_0;
 

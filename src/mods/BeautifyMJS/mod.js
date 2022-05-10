@@ -1,6 +1,6 @@
 class Mod {
 
-	name = 'BeautyMJS';
+	name = 'BeautifyMJS';
 	type = 'U';
 	title = 'Main.js для редактора';
 	desc = 'Сохраняет main.js в читабельном формате';

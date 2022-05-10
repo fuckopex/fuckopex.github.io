@@ -7,6 +7,7 @@ class Mod {
 	title = 'CheatWeapon';
 	desc = 'описание придумать';
 
+
 	use () {
 
 		Mods.Packages.use(

@@ -7,11 +7,12 @@ class Mod {
 	title = 'CheatVisibility';
 	desc = 'описание придумать';
 
+
 	use () {
 
-		Mods['BetterVisibility'].use();
+		Mods.BetterVisibility.use();
 
-		Mods.ResReplace.use(
+		Mods.Resources.use(
 
 			[ /27570502747446\/object.3ds/, `${ this.pwd }/bomb.3ds` ],
 

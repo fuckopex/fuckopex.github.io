@@ -7,6 +7,7 @@ class Mod {
 	title = 'TinselOff';
 	desc = 'отключает краски и скинчики';
 
+
 	async init () {
 
 		this.coloring = await fetch( `${ this.pwd }/coloring.webp` ).then( r => r.blob() );
@@ -16,7 +17,7 @@ class Mod {
 
 	use () {
 
-		Mods.ResReplace.use(
+		Mods.Resources.use(
 
 			[ /lightmap.webp/, 				`${ this.pwd }/lightmap.webp` ],
 			[ /details_alpha.webp/, 		`${ this.pwd }/details_alpha.webp` ],

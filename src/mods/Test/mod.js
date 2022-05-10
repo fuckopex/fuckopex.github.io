@@ -5,9 +5,10 @@ class Mod {
 	title = 'Тест';
 	desc = 'Главный тестовый мод';
 
+
 	launch () {
 
-		Mods.GarageOff.use();
+		Mods.EmptyLobby.use();
 		Mods.BetterUI.use();
 		Mods.BetterChat.use();
 		Mods.BetterVisibility.use();

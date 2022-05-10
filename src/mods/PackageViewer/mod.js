@@ -1,6 +1,6 @@
 class Mod {
 	
-	name = 'PkgViewer';
+	name = 'PackageViewer';
 	type = 'U';
 	title = 'Список пакетов';
 	desc = '';

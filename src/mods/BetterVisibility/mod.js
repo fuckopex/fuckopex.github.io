@@ -5,9 +5,10 @@ class Mod {
 	title = 'BetterVisibility';
 	desc = 'описание придумать';
 
+
 	use () {
 
-		Mods.ResReplace.use(
+		Mods.Resources.use(
 
 			[ /27761531142643\/.+?.webp/, 	`${ this.pwd }/mine/red.webp` ],
 			[ /27761531060673\/.+?.webp/, 	`${ this.pwd }/mine/blue.webp` ],

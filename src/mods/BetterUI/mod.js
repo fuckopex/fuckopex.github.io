@@ -8,7 +8,7 @@ class Mod {
 
 	use () {
 
-		Mods.ResReplace.use(
+		Mods.Resources.use(
 
 			[ /background\/.+?webp/, 	`${ this.pwd }/bg.webp` ],
 

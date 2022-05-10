@@ -1,6 +1,6 @@
 class Mod {
 
-	name = 'ResReplace';
+	name = 'Resources';
 	type = 'U';
 	title = 'Замена ресурсов';
 	desc = 'Таблица замен файлов на основе регулярных выражений';
