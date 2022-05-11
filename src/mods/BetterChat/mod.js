@@ -3,7 +3,8 @@ class Mod {
 	name = 'BetterChat';
 	type = 'T';
 	title = 'BetterChat';
-	desc = 'типа описание';
+	desc = `Время видимости чата в бою 10 секунд
+Количество строк чата в бою увеличино до 14`;
 
 
 	use () {

@@ -54,4 +54,4 @@ class Mods {
 
 }
 
-export default window._Mods = new Mods;
+export default window.Mods = new Mods;

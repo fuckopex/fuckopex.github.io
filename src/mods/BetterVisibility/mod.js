@@ -3,7 +3,18 @@ class Mod {
 	name = 'BetterVisibility';
 	type = 'T';
 	title = 'BetterVisibility';
-	desc = 'описание придумать';
+	desc = `Покрашены в яркие цвета мины, флаги, мяч, дроп, бомба васпа
+Все маркеры видны на любом расстоянии
+Отклчена полупрозрачность флагов и мячей на танках
+Дальность радара увеличена в 2 раза
+Отключен графические эффект бессмертия у танков при респауне
+Отключены графические эффекты нагрева и заморозки у танков
+Старые индикаторы урона
+Увеличена скорость подъема камеры через колесико мыши
+Убраны все подсветки кроме радара хорнета
+Цвет подсветки радара хорнета - Красный
+Отключены некоторые графические эффекты взрыва бомбы васпа
+	`;
 
 
 	use () {
@@ -156,24 +167,6 @@ class Mod {
 			[ 'MouseLookCameraController:', f => {
 
 				f.Companion.HEIGHT_CHANGE_PER_WHEEL_CLICK_0 = 0.085;
-
-			}],
-
-			[ 'FollowCameraRelativePath:1', f => {
-
-				const bz = Mods.Packages.get( 'alternativa.math.bezier' );
-				const getPoint_2 = Mods.Packages.prop( f.prototype, 'getPoint', 2 );
-
-				const p0_0 = [ 545, 145 ];
-				const p1_0 = [ 1395, 930 ];
-				const p2_0 = [ 1565, 2245 ];
-				const p3_0 = [ 5e3, 5e3 ];
-				const pathDistanceFactor = 1;
-
-				f.prototype[ getPoint_2 ] = function ( t, e ) {
-					e.distance = bz( t, p0_0[0], p1_0[0], p2_0[0], p3_0[0] ) * pathDistanceFactor;
-					e.height = bz( t, p0_0[1], p1_0[1], p2_0[1], p3_0[1] );
-				}
 
 			}],
 

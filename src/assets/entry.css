@@ -38,6 +38,7 @@
 
 ::-webkit-scrollbar {
 	width: 0.75vh;
+	height: 0.75vh;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -89,6 +90,7 @@ body {
 
 [mod-title] {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
     font-weight: 500;
@@ -96,9 +98,14 @@ body {
     color: var(--clr-t);
 }
 
+[mod-title-type] {
+	font-weight: 400;
+    font-size: var(--size-small);
+}
+
 [mod-desc] {
 	height: 56vh;
-	overflow: hidden;
+	overflow: auto;
     font-weight: 400;
     white-space: pre-wrap;
     color: var(--gray-600);
@@ -127,6 +134,7 @@ body {
 }
 
 [mod] {
+	display: none;
 	overflow: hidden;
     white-space: nowrap;
     padding: 1.25vh 1.75vh;

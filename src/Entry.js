@@ -22,7 +22,7 @@ class Entry {
 
 	}
 
-	async launch ( mods, viewer, title, desc, launch, div ) {
+	async launch ( mods, viewer, title, type, desc, launch, div ) {
 
 		await Mods.init();
 
@@ -30,7 +30,8 @@ class Entry {
 
 		mods 	= document.querySelector( '[mods]' );
 		viewer 	= document.querySelector( '[mod-viewer]' );
-		title 	= document.querySelector( '[mod-title]' );
+		title 	= document.querySelector( '[mod-title-title]' );
+		type 	= document.querySelector( '[mod-title-type]' );
 		desc 	= document.querySelector( '[mod-desc]' );
 		launch 	= document.querySelector( '[mod-launch]' );
 
@@ -46,6 +47,12 @@ class Entry {
 
 				viewer.setAttribute( 'mod-type', mod.type );
 				title.textContent = mod.title;
+
+				if ( mod.type == 'D' ) type.textContent = `[DEBUG]`;
+				if ( mod.type == 'U' ) type.textContent = `[UTIL]`;
+				if ( mod.type == 'T' ) type.textContent = `[TANKI]`;
+				if ( mod.type == 'C' ) type.textContent = `[CHEAT]`;
+
 				desc.textContent = mod.desc;
 				launch.textContent = 'Запуск ->';
 				launch.onpointerup = event => {

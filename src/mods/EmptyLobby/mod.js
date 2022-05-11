@@ -3,7 +3,7 @@ class Mod {
 	name = 'EmptyLobby';
 	type = 'T';
 	title = 'Пустой гараж';
-	desc = 'описание придумать';
+	desc = `Убрна 3D-модель гаража в лобби игры`;
 
 	use () {
 
