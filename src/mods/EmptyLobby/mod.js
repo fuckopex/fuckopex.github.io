@@ -9,8 +9,8 @@ class Mod {
 
 		Mods.Resources.use(
 
-			[ /27565450061130\/.+?\.webp/, 	`${ this.pwd }/null.webp` ],
-			[ /27565450061130\/object.3ds/, `${ this.pwd }/view.3ds` ],
+			[ /30023217453322\/.+?\.webp/, 	`${ this.pwd }/null.webp` ],
+			[ /30023217453322\/object.3ds/, `${ this.pwd }/view.3ds` ],
 
 		);
 

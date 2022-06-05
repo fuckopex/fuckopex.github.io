@@ -39,7 +39,7 @@ class Datapack {
 	}
 
 	async loadTnk ( src, srcR, srcT, jsR, jsT, cssR ) {
-
+		let gg = 0;
 		src = 'https://tankionline.com/play/';
 		srcR = await fetch( src );
 		srcT = await srcR.clone().text();
@@ -51,9 +51,12 @@ class Datapack {
 
 		this.resps.push( srcR, jsR, cssR );
 
+		for ( let m of Array.from( jsT.matchAll( /"(static\/.+?)"/g ) ) )
+			await fetch( src + m[1] ).then( r => this.resps.push( r ), console.log( ++gg ) );
+/*
 		return Promise.all( Array.from( jsT.matchAll( /"(static\/.+?)"/g ) )
 			.map( m => fetch( src + m[1] ).then( r => this.resps.push( r ) ).catch(e=>console.log(e)) ) );
-
+*/
 	}
 
 	async pack ( pack, url, type, ab, size, ws ) {

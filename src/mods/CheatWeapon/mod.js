@@ -75,7 +75,9 @@ class Mod {
 
 			[ 'CrusaderProjectileComponent:', f => {
 
-				f.prototype[ f.considerBody_1 ] = function ( t ) {
+				const considerBody_1 = Mods.Packages.prop( f.prototype, 'considerBody', 1 );
+
+				f.prototype[ considerBody_1 ] = function ( t ) {
 
 					const
 					g = Mods.Packages.get.bind( Mods.Packages ),
@@ -106,6 +108,7 @@ class Mod {
 					}
 					
 					return false;
+					
 				}
 
 			}],

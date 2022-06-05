@@ -26,6 +26,12 @@ class Mod {
 
 		);
 
+		Mods.Resources.use(
+
+			
+
+		)
+
 		Mods.Tanki.use();
 
 
