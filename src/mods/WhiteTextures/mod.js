@@ -17,7 +17,7 @@ class Mod {
 	}
 
 	use () {
-	
+
 		Mods.Resources.use(
 			
 			[ /cliff_0.3ds/, 						`${ this.pwd }/3ds/cliff/cliff_0.3ds` ],
@@ -183,7 +183,7 @@ class Mod {
 
 		);
 
-		Mods.Tanki.replace( /(return .\.atlases=)(.)/, `$1Mods.${ this.name }.change($2)` );
+		Mods.Tanki.replace( /(this\.atlases=)(.)/, `$1Mods.${ this.name }.change($2)` );
 
 	}
 
@@ -197,13 +197,15 @@ class Mod {
 
 	change ( atlases ) {
 
-		for ( let a of atlases.toArray() )
-		for ( let t of a.textures.toArray() ) {
+		console.log( atlases );
 
-			t.width = 32;
-			t.height = 32;
-			t.y = 0;
-			t.x = 0;
+		for ( let a of atlases.toArray() )
+		for ( let s of a.subTextures.toArray() ) {
+
+			s.uvTransform.uScale = 1;
+			s.uvTransform.vScale = 1;
+			s.uvTransform.uOffset = 0;
+			s.uvTransform.vOffset = 0;
 
 		}
 

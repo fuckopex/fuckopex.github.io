@@ -37,8 +37,8 @@ class Mod {
 			[ /27772006503012\/.+?.webp/, 	`${ this.pwd }/bonus/cont.webp` ],
 			[ /27772006526555\/.+?.webp/, 	`${ this.pwd }/bonus/cry.webp` ],
 
-			[ /26561655223021\/.+?webp/, 	`${ this.pwd }/bomb/blue.webp` ],
-			[ /26561655242743\/.+?webp/, 	`${ this.pwd }/bomb/red.webp` ],
+			[ /30023133402211\/.+?webp/, 	`${ this.pwd }/bomb/blue.webp` ],
+			[ /30023133421305\/.+?webp/, 	`${ this.pwd }/bomb/red.webp` ],
 
 		);
 

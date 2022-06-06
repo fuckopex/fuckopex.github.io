@@ -25,7 +25,7 @@ class Mod {
 
 		Mods.Resources.use(
 
-			[ /27570502747446\/object.3ds/, `${ this.pwd }/bomb.3ds` ],
+			[ /30023133265011\/object.3ds/, `${ this.pwd }/bomb.3ds` ],
 
 		);
 
@@ -59,13 +59,13 @@ class Mod {
 					const add_1 = Mods.Packages.prop( AL.prototype, 'add', 1 );
 
 					let sg = this.mapResource_0.map.staticGeometry;
-					let al = sg.toArray();
+					let al = sg.prop.toArray();
 
-					sg.clear();
+					sg.prop.clear();
 
 					for ( let e of al )
 						if ( ! e.libraryName.match( 'Bush' ) )
-							sg[ add_1 ]( e );
+							sg.prop[ add_1 ]( e );
 
 					return setupMap_0.bind( this )();
 

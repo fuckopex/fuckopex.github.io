@@ -88,18 +88,18 @@ class Mod {
 
 					RemoteUserTitleConfiguratorComponent = g( 'RemoteUserTitleConfiguratorComponent:' ),
 					TerminatorRecoilComponent = g( 'TerminatorRecoilComponent:' ),
-					TankComponent = g( 'TankComponent:' );
+					TankComponent = g( 'components.TankComponent:' );
 
 					let title, tankc;
 
 					if ( t.data )
 
-					if ( title = t.data[ gcon_0 ]( RemoteUserTitleConfiguratorComponent ) )
-					if ( title.getTeamRelation_0().name == 'ENEMY' )
-
 					if ( tankc = t.data[ gcon_0 ]( TankComponent ) )
-					if ( tankc.state.name$ == 'ACTIVE' ) {
+					if ( tankc.state.name$ == 'ACTIVE' )
 
+					if ( title = t.data[ gcon_0 ]( RemoteUserTitleConfiguratorComponent ) )
+					if ( title.getTeamRelation_0().name == 'ENEMY' ) {
+						
 						if ( MAGIC.isActive )
 							return t.data[ gcon_0 ]( TerminatorRecoilComponent ) != null;
 
