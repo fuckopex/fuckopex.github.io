@@ -65,9 +65,11 @@ class Mod {
 
 				const calculateLocalDirections_0 = f.prototype.calculateLocalDirections_0;
 
-				f.prototype.calculateLocalDirections_0 = function ( t ) {
+				f.prototype.calculateLocalDirections_0 = function ( coneAngle ) {
 
-					return calculateLocalDirections_0.bind( this )( 0.348 );
+					const good = 0.348;
+
+					return calculateLocalDirections_0.bind( this )( coneAngle < good ? good : coneAngle );
 
 				}
 

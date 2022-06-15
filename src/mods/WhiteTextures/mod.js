@@ -197,8 +197,6 @@ class Mod {
 
 	change ( atlases ) {
 
-		console.log( atlases );
-
 		for ( let a of atlases.toArray() )
 		for ( let s of a.subTextures.toArray() ) {
 

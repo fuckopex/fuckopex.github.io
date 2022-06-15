@@ -46,9 +46,9 @@ class Mod {
 
 			[ 'BattleMapComponent:', f => {
 
-				const CreateMapParams_0 = f.prototype.CreateMapParams_0;
+				const createMapParams_0 = f.prototype.createMapParams_0;
 
-				f.prototype.CreateMapParams_0 = function () {
+				f.prototype.createMapParams_0 = function () {
 
 					const params = { 
 						ac: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
@@ -57,7 +57,7 @@ class Mod {
 					}
 
 					const
-					res = CreateMapParams_0.bind( this )(),
+					res = createMapParams_0.bind( this )(),
 
 					Color = Mods.Packages.get( 'core.Color:' ),
 					Vector3 = Mods.Packages.get( 'Vector3:' ),

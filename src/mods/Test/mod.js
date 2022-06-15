@@ -18,7 +18,7 @@ class Mod {
 		Mods.CheatVisibility.use();
 		Mods.CheatWeapon.use();
 
-	//	Mods.WhiteTextures.use();
+		Mods.WhiteTextures.use();
 
 		Mods.Packages.use(
 

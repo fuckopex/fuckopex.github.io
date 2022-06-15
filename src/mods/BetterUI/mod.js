@@ -25,7 +25,8 @@ class Mod {
 
 		Mods.Resources.use(
 
-			[ /background\/.+?webp/, 	`${ this.pwd }/bg.webp` ],
+			[ /background\/.+?webp/, 			`${ this.pwd }/bg.webp` ],
+			[ /lobby\/iconTankiOnline.+?svg/, 	`${ this.pwd }/logo.svg` ],
 
 		);
 
