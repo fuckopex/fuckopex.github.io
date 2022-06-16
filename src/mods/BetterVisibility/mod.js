@@ -1,7 +1,7 @@
 class Mod {
 
 	name = 'BetterVisibility';
-	type = 'T';
+	type = 'TANKI';
 	title = 'BetterVisibility';
 	desc = `Покрашены в яркие цвета мины, флаги, мяч, дроп, бомба васпа
 Все маркеры видны на любом расстоянии

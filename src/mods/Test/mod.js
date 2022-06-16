@@ -1,7 +1,7 @@
 class Mod {
 
 	name = 'Test';
-	type = 'D';
+	type = 'DEBUG';
 	title = 'Тест';
 	desc = 'Главный тестовый мод';
 

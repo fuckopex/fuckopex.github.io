@@ -3,7 +3,7 @@ let STORE = null;
 class Mod {
 
 	name = 'CheatVisibility';
-	type = 'C';
+	type = 'CHEAT';
 	title = 'CheatVisibility';
 	desc = `Изменения превносимые читом:
 

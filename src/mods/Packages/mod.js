@@ -1,7 +1,7 @@
 class Mod {
 
 	name = 'Packages';
-	type = 'U';
+	type = 'UTIL';
 	title = 'Танковые классы';
 	desc = 'Доступ к классам танков через cjs.exports';
 

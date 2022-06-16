@@ -1,7 +1,7 @@
 class Mod {
 
 	name = 'EmptyLobby';
-	type = 'T';
+	type = 'TANKI';
 	title = 'Пустой гараж';
 	desc = `Убрна 3D-модель гаража в лобби игры`;
 

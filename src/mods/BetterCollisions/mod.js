@@ -1,7 +1,7 @@
 class Mod {
 
 	name = 'BetterCollisions';
-	type = 'T';
+	type = 'TANKI';
 	title = 'BetterCollisions';
 	desc = '';
 

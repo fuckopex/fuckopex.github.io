@@ -3,7 +3,7 @@ let coloringB0, billboardB0;
 class Mod {
 
 	name = 'TinselOff';
-	type = 'T';
+	type = 'TANKI';
 	title = 'TinselOff';
 	desc = `Отключено отображение всех красок и скинов
 Цвет всех танков - Приятный зеленый

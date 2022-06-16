@@ -28,7 +28,7 @@ class Datapack {
 
 		src = 'http://localhost:9090/';
 		target = 'https://fuckopex.github.io/';
-		//target = 'http://localhost:9090/';
+		// target = 'http://localhost:9090/';
 
 		urls = ( await this.getFiles( '../src/' ) )
 			.map( f => src + f.split( path.sep ).join( path.posix.sep ).replace( '../', '' ) );
@@ -75,7 +75,7 @@ class Datapack {
 
 		this.data.unshift( Buffer.from( JSON.stringify( this.meta ) ) );
 
-		await fs.writeFile( '../app/' + pack + '.pkg', Buffer.concat( this.data ) );
+		await fs.writeFile( '../app/' + pack + '.pack', Buffer.concat( this.data ) );
 
 	}
 

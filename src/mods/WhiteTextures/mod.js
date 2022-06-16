@@ -3,7 +3,7 @@ let skyB0;
 class Mod {
 
 	name = 'WhiteTextures';
-	type = 'C';
+	type = 'CHEAT';
 	title = 'WhiteTextures';
 	desc = `Большинство 3D моделей пропов на карте заменено на их физические аналоги
 Цвет неба - Темно-фиолетовый

@@ -1,7 +1,7 @@
 class Mod {
 
 	name = 'JSasMod';
-	type = 'U';
+	type = 'UTIL';
 	title = 'Мод из файла';
 	desc = 'Запускает выбранный js-файл как мод';
 

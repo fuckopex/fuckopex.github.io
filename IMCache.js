@@ -1,8 +1,8 @@
 class IMCache {
 
-	constructor () {
+	constructor ( packs ) {
 		
-		this.packs = [ 'entry', 'tanki' ];
+		this.packs = packs;
 		this.responses = {};
 		this.active = false;
 		this.ready = new Promise( ( r => this.resolve = r ).bind( this ) );
@@ -11,16 +11,20 @@ class IMCache {
 
 	}
 
-	async load ( pack, ab, len, meta, data ) {
+	async load ( resp, ui8, nb, len, meta, data ) {
 
-		for ( let name of this.packs ) {
+		for ( let pack of this.packs ) {
 
-			pack = await this.update( name );
+			resp = await this.update( pack );
+			ui8 = new Uint8Array( await resp.arrayBuffer() );
 
-			ab = new Uint8Array( await pack.arrayBuffer() );
-			len = ab.indexOf( 0x5D );
-			meta = JSON.parse( new TextDecoder().decode( ab.subarray( 0, len + 1 ) ) );
-			data = ab.subarray( len + 1, ab.length );
+			nb = new Array( 256 ).fill( 0 );
+			for ( len = 0; len <= ui8.length; len++ )
+			if ( nb[ ui8[ len ] ]++, nb[ 91 ] == nb[ 93 ] ) break;
+			
+
+			meta = JSON.parse( new TextDecoder().decode( ui8.subarray( 0, len + 1 ) ) );
+			data = ui8.subarray( len + 1, ui8.length );
 
 			meta.reduce( ( begin, file, end, blob ) => {
 
@@ -39,16 +43,16 @@ class IMCache {
 
 	}
 
-	async update ( name, cache, url, req, stag, ctag ) {
+	async update ( pack, cache, url, req, stag, ctag ) {
 
 		cache = 'datapacks';
-		url = '/app/' + name + '.pkg';
+		url = '/app/' + pack + '.pack';
 		req = new Request( url );
 
 		stag = ( await fetch( url, { method: 'HEAD', cache: 'no-store' } ) ).headers.get( 'etag' );
 		ctag = ( await caches.match( req ) )?.headers.get( 'etag' );
 
-		if ( ctag != stag )
+		if ( ctag !== stag )
 
 			await caches.open( cache ).then( async c => c.put( req, await fetch( url, { cache: 'no-store' } ) ) );
 
@@ -58,26 +62,22 @@ class IMCache {
 
 	match ( url ) {
 		
-		this.response = this.responses[ url ]?.clone();
-
-		return this.response ? true : false;
+		return ( this.response = this.responses[ url ]?.clone() ) ? true : false;
 
 	}
 
 }
 
 
-self.imc = new IMCache;
+self.imc = new IMCache( [ 'entry', 'tanki' ] );
 
 self.addEventListener( 'install', event => self.skipWaiting() );
 
 self.addEventListener( 'activate', event => clients.claim() );
 
-self.addEventListener( 'fetch', ( event, url ) => {
+self.addEventListener( 'fetch', event => {
 
-	url = event.request.url;
-
-	//if ( url == `${ self.origin }/` ) imc.init();
+	let url = event.request.url;
 
 	if ( imc.active )
 
@@ -85,8 +85,10 @@ self.addEventListener( 'fetch', ( event, url ) => {
 
 	else
 
-		event.respondWith( imc.ready.then( () =>
+		event.respondWith( imc.ready.then( () => 
 
-			( imc.match( url ), imc.response || fetch( url, { cache: 'no-store' } ) ) ) );
+			imc.match( url ) ? imc.response : fetch( url, { cache: 'no-store' } )
+
+		));
 
 });

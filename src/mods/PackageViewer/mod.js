@@ -1,7 +1,7 @@
 class Mod {
 	
 	name = 'PackageViewer';
-	type = 'U';
+	type = 'UTIL';
 	title = 'Список пакетов';
 	desc = 'Отображает полный список танковых классов с возможностью фильтрации';
 

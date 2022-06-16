@@ -1,7 +1,7 @@
 class Mod {
 
 	name = 'DebugMJS';
-	type = 'D';
+	type = 'DEBUG';
 	title = 'Отладить main.js';
 	desc = 'Отладочный запуск танкового main.js из файла';
 

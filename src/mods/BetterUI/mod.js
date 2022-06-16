@@ -1,7 +1,7 @@
 class Mod {
 
 	name = 'BetterUI';
-	type = 'T';
+	type = 'TANKI';
 	title = 'BetterUI';
 	desc = `Изменения вносимые модом:
 
