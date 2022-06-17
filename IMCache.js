@@ -22,7 +22,7 @@ class IMCache {
 			for ( len = 0; len <= ui8.length; len++ )
 			if ( nb[ ui8[ len ] ]++, nb[ 91 ] == nb[ 93 ] ) break;
 			
-
+		console.log( ui8.length, len, new TextDecoder().decode( ui8.subarray( 0, len + 1 ) ) )
 			meta = JSON.parse( new TextDecoder().decode( ui8.subarray( 0, len + 1 ) ) );
 			data = ui8.subarray( len + 1, ui8.length );
 
@@ -69,7 +69,7 @@ class IMCache {
 }
 
 
-self.imc = new IMCache( [ 'entry', 'tanki' ] );
+self.imc = new IMCache( [ 'launcher', 'tanki' ] );
 
 self.addEventListener( 'install', event => self.skipWaiting() );
 

@@ -1,0 +1,1 @@
+deno run --allow-all Launcher.pack.js

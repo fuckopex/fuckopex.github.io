@@ -1,99 +1,39 @@
-const fs = require( 'fs/promises' );
-const path = require( 'path' );
-
 class Datapack {
 
-	constructor () {
+	static async use ( config, meta, data, resp, type, ui8, size ) {
 
-		this.resps = [];
-		this.meta = [];
-		this.data = [];
+		meta = [];
+		data = [];
 
-	}
+		for ( let url of config.urls ) {
 
-	async getFiles ( dir, files ) {
+			resp = await fetch( url );
+			type = resp.headers.get( 'content-type' );
+			ui8  = new Uint8Array( await resp.arrayBuffer() );
+			size = ui8.length;
 
-		files = await fs.readdir( dir );
-
-		files = await Promise.all( files.map( async ( file, p, s ) => {
-			p = path.join( dir, file );
-			s = await fs.stat( p );
-			return s.isDirectory() ? this.getFiles( p ) : ( s.isFile() ? p : null );
-		}));
-
-		return files.reduce( ( all, fc ) => all.concat( fc ), [] );
-	}
-
-	async loadSrc ( src, target, urls ) {
-
-		src = 'http://localhost:9090/';
-		target = 'https://fuckopex.github.io/';
-		// target = 'http://localhost:9090/';
-
-		urls = ( await this.getFiles( '../src/' ) )
-			.map( f => src + f.split( path.sep ).join( path.posix.sep ).replace( '../', '' ) );
-		urls.push( src );
-
-		return Promise.all( urls.map( u => fetch( u ).then( r => this.resps.push( ( r.s = src, r.t = target, r ) ) ) ) );
-
-	}
-
-	async loadTnk ( src, srcR, srcT, jsR, jsT, cssR ) {
-		let gg = 0;
-		src = 'https://tankionline.com/play/';
-		srcR = await fetch( src );
-		srcT = await srcR.clone().text();
-
-		jsR = await fetch( src + 'static/js/' + srcT.match( /main\.[0-9a-f]{8}\.js/ ) );
-		jsT = await jsR.clone().text();
-
-		cssR = await fetch( src + 'static/css/' + srcT.match( /main\.[0-9a-f]{8}\.css/ ) );
-
-		this.resps.push( srcR, jsR, cssR );
-
-		for ( let m of Array.from( jsT.matchAll( /"(static\/.+?)"/g ) ) )
-			await fetch( src + m[1] ).then( r => this.resps.push( r ), console.log( ++gg ) );
-/*
-		return Promise.all( Array.from( jsT.matchAll( /"(static\/.+?)"/g ) )
-			.map( m => fetch( src + m[1] ).then( r => this.resps.push( r ) ).catch(e=>console.log(e)) ) );
-*/
-	}
-
-	async pack ( pack, url, type, ab, size, ws ) {
-
-		for ( let resp of this.resps ) {
-			
-			url 	= resp.t ? resp.url.replace( resp.s, resp.t ) : resp.url;
-			type 	= resp.headers.get( 'content-type' );
-			ab 		= new Uint8Array( await resp.arrayBuffer() );
-			size 	= ab.length;
-
-			this.meta.push( { url, type, size } );
-			this.data.push( ab );
+			meta.push( {
+				url: url.replace( config.src, config.target ),
+				type,
+				size
+			});
+			data.push( ui8 );
 
 		}
 
-		this.data.unshift( Buffer.from( JSON.stringify( this.meta ) ) );
+		data.unshift( new TextEncoder().encode( JSON.stringify( meta ) ) );
 
-		await fs.writeFile( '../app/' + pack + '.pack', Buffer.concat( this.data ) );
 
-	}
+		let merge = new Uint8Array( data.reduce( ( len, ui8 ) => len += ui8.length, 0 ) );
 
-	async launch ( pack ) {
+		for ( let i = 0, offset = 0; i < data.length; i++ )
+			merge.set( data[ i ], offset += data[ i - 1 ]?.length ?? 0 );
 
-		pack = process.argv[2];
 
-		if ( pack == 'entry' )
-			await this.loadSrc();
-
-		if ( pack == 'tanki' )
-			await this.loadTnk();
-
-		if ( pack )
-			await this.pack( pack );
+		await Deno.writeFile( `../app/${ config.pack }.pack`, merge );
 
 	}
 
 }
 
-( new Datapack ).launch()
+export default Datapack;

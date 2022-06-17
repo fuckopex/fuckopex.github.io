@@ -1,1 +1,0 @@
-node --experimental-fetch Datapack.js entry

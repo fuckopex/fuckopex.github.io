@@ -24,14 +24,14 @@ class Launcher {
 
 	async launch ( el = {} ) {
 
-		await Mods.init();
 		await document.body.render( '/src/assets/launcher.html' );
-
 
 		for ( let selector of [ 'list', 'viewer', 'title', 'label', 'desc', 'launch' ] )
 			
 			el[ selector ] = document.querySelector( `[mod-${ selector }]` );
 
+
+		await Mods.init();
 
 		for ( let mod of Object.values( Mods ) ) {
 

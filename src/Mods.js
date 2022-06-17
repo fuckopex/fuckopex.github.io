@@ -33,17 +33,18 @@ class Mods {
 
 	}
 
-	async load ( url, imp, txt, exp, js, blob, mod ) {
+	async load ( url, blob, mod ) {
 
-		imp = `import Mods from '${ window.location.origin }/src/Mods.js';`;
-		txt = await fetch( url ).then( r => r.text() );
-		exp = `export default new Mod;`;
+		blob = new Blob( [
 
-		js = `${ imp }\n${ txt }\n${ exp }`;
+			`import Mods from '${ window.location.origin }/src/Mods.js';
+			${ await fetch( url ).then( r => r.text() ) }
+			export default new Mod;`
 
-		blob = new Blob( [ js ], { type: 'application/javascript' } );
+		], { type: 'application/javascript' } );
+
+
 		mod = await import( URL.createObjectURL( blob ) ).then( m => m.default );
-
 		mod.pwd = window.location.origin + url.replace( '/' + url.split( '/' ).pop(), '' );
 		await mod.init?.();
 		this[ mod.name ] = mod;
