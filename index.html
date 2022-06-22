@@ -9,25 +9,7 @@
 </head>
 <body>
 
-	<script type="module">
-
-		let register, worker;
-
-		register = await navigator.serviceWorker.register( '/IMCache.js' );
-		register = await register.update();
-
-		worker = register.installing || register.waiting || register.active;
-		worker.ready = () => worker.state == 'activated';
-
-		await new Promise( resolve => {
-			worker.addEventListener( 'statechange', () => worker.ready() && resolve() );
-			worker.ready() && resolve();
-		});
-
-
-		import( '/src/Launcher.js' );
-
-	</script>
+	<script type="module" src="/src/App.js"></script>
 
 </body>
 </html>

@@ -1,8 +1,7 @@
 class IMCache {
 
-	constructor ( packs ) {
+	constructor () {
 		
-		this.packs = packs;
 		this.responses = {};
 		this.active = false;
 		this.ready = new Promise( ( r => this.resolve = r ).bind( this ) );
@@ -11,18 +10,27 @@ class IMCache {
 
 	}
 
-	async load ( resp, ui8, nb, len, meta, data ) {
+	async load ( packs, resp, ui8, nb, len, meta, data ) {
 
-		for ( let pack of this.packs ) {
+		packs = await new Promise( r =>
+
+			indexedDB.open( 'datapacks' ).onsuccess = e => r( e.target.result.objectStoreNames )
+
+		);
+		
+		for ( let pack of packs ) {
 
 			resp = await this.update( pack );
 			ui8 = new Uint8Array( await resp.arrayBuffer() );
 
+
 			nb = new Array( 256 ).fill( 0 );
+
 			for ( len = 0; len <= ui8.length; len++ )
-			if ( nb[ ui8[ len ] ]++, nb[ 91 ] == nb[ 93 ] ) break;
+				if ( nb[ ui8[ len ] ]++, nb[ 91 ] == nb[ 93 ] )
+					break;
+
 			
-		console.log( ui8.length, len, new TextDecoder().decode( ui8.subarray( 0, len + 1 ) ) )
 			meta = JSON.parse( new TextDecoder().decode( ui8.subarray( 0, len + 1 ) ) );
 			data = ui8.subarray( len + 1, ui8.length );
 
@@ -69,23 +77,23 @@ class IMCache {
 }
 
 
-self.imc = new IMCache( [ 'launcher', 'tanki' ] );
+self.imc = new IMCache();
 
-self.addEventListener( 'install', event => self.skipWaiting() );
+self.addEventListener( 'install', e => self.skipWaiting() );
 
-self.addEventListener( 'activate', event => clients.claim() );
+self.addEventListener( 'activate', e => clients.claim() );
 
-self.addEventListener( 'fetch', event => {
+self.addEventListener( 'fetch', e => {
 
-	let url = event.request.url;
+	let url = e.request.url;
 
 	if ( imc.active )
 
-		imc.match( url ) && event.respondWith( imc.response );
+		imc.match( url ) && e.respondWith( imc.response );
 
 	else
 
-		event.respondWith( imc.ready.then( () => 
+		e.respondWith( imc.ready.then( () => 
 
 			imc.match( url ) ? imc.response : fetch( url, { cache: 'no-store' } )
 

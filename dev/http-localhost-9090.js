@@ -33,7 +33,7 @@ class StaticResource extends Drash.Resource {
 }
 
 
-const DevServer = new Drash.Server( {
+new Drash.Server( {
 
 	protocol: 'http',
 	hostname: 'localhost',
@@ -43,6 +43,4 @@ const DevServer = new Drash.Server( {
 		StaticResource,
 	],
 
-})
-
-DevServer.run();
+}).run();

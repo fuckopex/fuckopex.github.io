@@ -39,18 +39,18 @@ class Launcher {
 			el.mod.setAttribute( 'mod', '' );
 			el.mod.setAttribute( 'mod-type', mod.type );
 			el.mod.textContent = mod.title;
-			el.mod.addEventListener( 'pointerup', event => {
+			el.mod.addEventListener( 'pointerup', e => {
 
-				if ( event.button !== 0 ) return;
+				if ( e.button !== 0 ) return;
 
 				el.viewer.setAttribute( 'mod-type', mod.type );
 				el.title.textContent = mod.title;
 				el.label.textContent = `[${ mod.type }]`;
 				el.desc.textContent = mod.desc;
 				el.launch.textContent = 'Запуск ->';
-				el.launch.onpointerup = event => {
+				el.launch.onpointerup = e => {
 
-					if ( event.button !== 0 ) return;
+					if ( e.button !== 0 ) return;
 
 					document.title = mod.title;
 					document.body.render();

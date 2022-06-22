@@ -22,7 +22,31 @@ class Mod {
 
 		Mods.Packages.use(
 
+			[ 'ClosedContainerComponent', f => {
 
+				f.prototype.openContainer_0 = function () {
+
+					try {
+
+						let gy = Mods.Packages.get( 'ContainerActions' ).OpenLootBox;
+						let yes = Mods.Packages.get( 'OpenLootBox' ).ContainerActions;
+						let no = Mods.Packages.get( 'OpenLootBox' ).no;
+
+						let t = this.props.container;
+
+						this.store.dispatchFunction( new gy( t.id, t.type, 1 ) );
+
+					}
+					catch ( e ) {
+
+						console.log(e);
+
+					}
+
+
+				}
+
+			}],
 
 		);
 
