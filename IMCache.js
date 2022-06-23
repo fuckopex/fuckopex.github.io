@@ -2,21 +2,21 @@ class IMCache {
 
 	constructor () {
 		
-		this.responses = {};
-		this.active = false;
-		this.ready = new Promise( ( r => this.resolve = r ).bind( this ) );
-
-		this.load();
+		this.ready = this.init();
 
 	}
 
-	async load ( packs, resp, ui8, nb, len, meta, data ) {
+	async init ( packs, idb, resp, ui8, nb, len, meta, data ) {
 
-		packs = await new Promise( r =>
+		this.responses = {};
+		this.active = false;
 
-			indexedDB.open( 'datapacks' ).onsuccess = e => r( e.target.result.objectStoreNames )
+		packs = await new Promise( resolve => {
 
-		);
+			idb = indexedDB.open( 'datapacks' );
+			idb.onsuccess = e => resolve( e.target.result.objectStoreNames );
+
+		});
 		
 		for ( let pack of packs ) {
 
@@ -47,7 +47,6 @@ class IMCache {
 		}
 
 		this.active = true;
-		this.resolve();
 
 	}
 
@@ -77,7 +76,7 @@ class IMCache {
 }
 
 
-self.imc = new IMCache();
+self.imc = new IMCache;
 
 self.addEventListener( 'install', e => self.skipWaiting() );
 

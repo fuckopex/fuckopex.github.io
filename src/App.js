@@ -5,7 +5,7 @@ class App {
 		Promise.resolve()
 		.then( () => this.init() )
 		.then( () => this.use() )
-		.then( () => this.launch() )
+		.then( () => this.launch() );
 
 	}
 
@@ -13,15 +13,21 @@ class App {
 
 		packs = [ 'launcher', 'tanki' ];
 
-		indexedDB.open( 'datapacks', 1 ).onupgradeneeded = e => {
+		await new Promise( resolve => {
 
-			idb = e.target.result;
-			names = idb.objectStoreNames;
+			idb = indexedDB.open( 'datapacks', 1 );
+			idb.onsuccess = e => resolve();
+			idb.onupgradeneeded = e => {
 
-			for ( let name of names ) idb.deleteObjectStore( name );
-			for ( let pack of packs ) idb.createObjectStore( pack );
-			
-		};
+				idb = e.target.result;
+				names = idb.objectStoreNames;
+
+				for ( let name of names ) idb.deleteObjectStore( name );
+				for ( let pack of packs ) idb.createObjectStore( pack );
+
+			};
+
+		});
 
 	}
 
@@ -34,14 +40,17 @@ class App {
 		worker.ready = () => worker.state == 'activated';
 
 		await new Promise( resolve => {
+
 			worker.addEventListener( 'statechange', () => worker.ready() && resolve() );
 			worker.ready() && resolve();
+
 		});
 
 	}
 
 	async launch () {
 
+		await import( '/src/Mods.js ').then( m => m.default.ready );
 		await import( '/src/Launcher.js' );
 
 	}

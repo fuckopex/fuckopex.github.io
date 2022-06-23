@@ -1,5 +1,11 @@
 class Mods {
 
+	constructor () {
+
+		this.ready = this.init();
+
+	}
+
 	async init ( dir, name, urls ) {
 
 		dir = '/src/mods/';

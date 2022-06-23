@@ -1,8 +1,17 @@
-import Mods from '/src/Mods.js';
-
 class Launcher {
 
-	init () {
+	constructor () {
+
+		Promise.resolve()
+		.then( () => this.init() )
+		.then( () => this.use() )
+		.then( () => this.launch() );
+
+	}
+
+	async init () {
+
+		this.el = {};
 
 		HTMLBodyElement.prototype.render = async function ( obj, fragment ) {
 
@@ -22,55 +31,51 @@ class Launcher {
 
 	}
 
-	async launch ( el = {} ) {
+	async use () {
 
 		await document.body.render( '/src/assets/launcher.html' );
 
 		for ( let selector of [ 'list', 'viewer', 'title', 'label', 'desc', 'launch' ] )
 			
-			el[ selector ] = document.querySelector( `[mod-${ selector }]` );
+			this.el[ selector ] = document.querySelector( `[mod-${ selector }]` );
 
+	}
 
-		await Mods.init();
+	async launch ( Mods ) {
+
+		await import( '/src/Mods.js' ).then( m => Mods = m.default );
 
 		for ( let mod of Object.values( Mods ) ) {
 
-			el.mod = document.createElement( 'div' );
-			el.mod.setAttribute( 'mod', '' );
-			el.mod.setAttribute( 'mod-type', mod.type );
-			el.mod.textContent = mod.title;
-			el.mod.addEventListener( 'pointerup', e => {
+			this.el.mod = document.createElement( 'div' );
+			this.el.mod.setAttribute( 'mod', '' );
+			this.el.mod.setAttribute( 'mod-type', mod.type );
+			this.el.mod.textContent = mod.title;
+			this.el.mod.addEventListener( 'pointerup', e => {
 
 				if ( e.button !== 0 ) return;
 
-				el.viewer.setAttribute( 'mod-type', mod.type );
-				el.title.textContent = mod.title;
-				el.label.textContent = `[${ mod.type }]`;
-				el.desc.textContent = mod.desc;
-				el.launch.textContent = 'Запуск ->';
-				el.launch.onpointerup = e => {
+				this.el.viewer.setAttribute( 'mod-type', mod.type );
+				this.el.title.textContent = mod.title;
+				this.el.label.textContent = `[${ mod.type }]`;
+				this.el.desc.textContent = mod.desc;
+				this.el.launch.textContent = mod.launch ? 'Запуск ->' : '';
+				this.el.launch.onpointerup = e => {
 
 					if ( e.button !== 0 ) return;
 
 					document.title = mod.title;
 					document.body.render();
 					
-					mod.launch?.();
+					mod.launch();
 
 				}
 
 			});
 
-			el.list.append( el.mod );
+			this.el.list.append( this.el.mod );
 
 		}
-
-	}
-
-	constructor () {
-
-		this.init();
-		this.launch();
 
 	}
 
